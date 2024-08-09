@@ -7,9 +7,11 @@ import * as authActions from '../actions/auth.actions';
 import {AuthService} from "../../services/auth.service";
 import {MESSAGING_ACTIONS} from "../actions/messages.actions";
 import {MessageCategory} from "../../components/shared/messages/messages.enum";
-import {MessageConfigService} from "../../components/shared/messages/message-config.service";
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthEffects {
 
   signIn$ = createEffect(() => this.actions.pipe(
@@ -19,7 +21,6 @@ export class AuthEffects {
           .pipe(
             tap(result => {
               if (result.data) {
-                this.authService.addToken(result.data?.login.jwt);
                 this.store.dispatch(authActions.signInFailed({err: false}));
               } else {
                 this.store.dispatch(authActions.signInFailed({err: true}));
@@ -29,38 +30,37 @@ export class AuthEffects {
               {type: authActions.signInSuccess.type, data: result.data?.login}
             )),
             catchError((err) => (
-              of(MESSAGING_ACTIONS.addMassage({
-                message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err)
-              })))
-            )
+             of(MESSAGING_ACTIONS.addMassage({
+             message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err)
+             })))
+             )
           );
       })
     )
   );
-
-  registerUser = createEffect(() => this.actions.pipe(
-      ofType(authActions.registerUser),
-      exhaustMap((payload) => {
-        return this.authService.register(payload)
-          .pipe(
-            tap(result => {
-              this.authService.addToken(result.data?.jwt)
-            }),
-            map(result => (
-              {type: authActions.registerUserSuccess.type, data: result.data}
-            )),
-            catchError((err) => (
-              of(authActions.registerUserFailed(err)))
-            )
-          );
-      })
-    )
-  );
+  //
+  // registerUser = createEffect(() => this.actions.pipe(
+  //     ofType(authActions.registerUser),
+  //     exhaustMap((payload) => {
+  //       return this.authService.register(payload)
+  //         .pipe(
+  //           tap(result => {
+  //           }),
+  //           map(result => (
+  //             {type: authActions.registerUserSuccess.type, data: result.data}
+  //           )),
+  //           catchError((err) => (
+  //             of(authActions.registerUserFailed(err)))
+  //           )
+  //         );
+  //     })
+  //   )
+  // );
+  private messageConfigService: any;
 
   constructor(
     private actions: Actions,
     private authService: AuthService,
-    private messageConfigService: MessageConfigService,
     private store: Store,
   ) {}
 }

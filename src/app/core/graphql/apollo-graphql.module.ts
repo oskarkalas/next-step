@@ -9,7 +9,7 @@ import {environment} from "../../../environments/environment";
 
 @NgModule({
   declarations: [],
-  imports: [ ApolloModule ]
+  imports: [ ApolloModule]
 })
 export class ApolloGraphqlModule {
 

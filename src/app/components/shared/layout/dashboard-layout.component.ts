@@ -3,9 +3,9 @@ import { MenuItem } from "primeng/api";
 import { Store } from "@ngrx/store";
 import { LayoutOutletsEnum } from "./layout-outlets.enum";
 import { Observable } from "rxjs";
-import { AuthService } from "../../modules/auth/services/auth.service";
-import { FullRoutesPathEnum } from "../../core/enums/full-routes-path.enum";
-import { selectTitle,} from "../../state/selectors/router.selectors";
+import { AuthService } from "../../../services/auth.service";
+import { FullRoutesPathEnum } from "../../../core/enums/full-routes-path.enum";
+import { selectTitle,} from "../../../state/selectors/router.selectors";
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -13,7 +13,7 @@ import { selectTitle,} from "../../state/selectors/router.selectors";
     <app-layout>
       <div slot-header>
         <div>
-          <h2 *ngIf="(routerTitleName | async) as pageTitle">{{ 'pageTitle.' + pageTitle | translate }}</h2>
+          <h2 *ngIf="(routerTitleName | async) as pageTitle">{{ 'pageTitle.' + pageTitle }}</h2>
         </div>
 
       </div>

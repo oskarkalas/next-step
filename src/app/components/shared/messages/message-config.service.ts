@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MessageCategory, MessageModel, MessageSeverity, MessageView} from "./messages.enum";
-import {TranslateService} from "@ngx-translate/core";
+
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class MessageConfigService {
   messageConfigMap = new Map<MessageCategory, MessageModel>();
 
-  constructor(private translateService: TranslateService) {}
+  constructor() {}
 
   public getConfigData(category: MessageCategory, messageData?: any): MessageModel {
 
@@ -24,13 +24,13 @@ export class MessageConfigService {
       id: 403,
       severity: MessageSeverity.ERROR,
       view: MessageView.TEXT,
-      message: this.translateService.instant('messages.LOGIN_ERROR'),
+      message: 'messages.LOGIN_ERROR',
     })
 
     this.messageConfigMap.set(MessageCategory.ERROR, {
       severity: MessageSeverity.ERROR,
       view: MessageView.TOAST,
-      message: this.translateService.instant('messages.ERROR'),
+      message: 'messages.ERROR',
     })
 
     if(this.messageConfigMap.has(category)) {

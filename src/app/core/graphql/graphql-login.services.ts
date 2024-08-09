@@ -10,6 +10,7 @@ import { LoginInput, LoginResponse, UserCreateInput } from "../../../generated/g
 })
 export class GraphqlLoginServices {
   constructor(private apollo: Apollo) { }
+
   public mutationLogin(loginInput: LoginInput): Observable<MutationResult<{
     login: LoginResponse
   }>> {

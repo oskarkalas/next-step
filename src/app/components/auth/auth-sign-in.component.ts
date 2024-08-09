@@ -1,21 +1,22 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {Router, RouterLink} from "@angular/router";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {MessagesModule} from "primeng/messages";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {MessagesModule} from "primeng/messages";
 import {DividerModule} from "primeng/divider";
-import {Message} from "primeng/api";
-import {LoginInput} from "../../../generated/gql.types";
 import {CheckboxModule} from "primeng/checkbox";
-import {FullRoutesPathEnum} from "../../core/enums/full-routes-path.enum";
-import {Observable} from "rxjs";
-import {selectAuthError} from "../../state/selectors/auth.selectors";
-import {Store} from "@ngrx/store";
 import {ButtonDirective} from "primeng/button";
+import {Message} from "primeng/api";
+import {Observable} from "rxjs";
+import {Store} from "@ngrx/store";
 import {Ripple} from "primeng/ripple";
+import {LoginInput} from "../../../generated/gql.types";
+import {FullRoutesPathEnum} from "../../core/enums/full-routes-path.enum";
 import {FormlyFieldConfig, FormlyModule} from "@ngx-formly/core";
 import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
-
+import {signIn} from "../../state/actions/auth.actions";
+import {selectAuthError} from "../../state/selectors/auth.selectors";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -67,10 +68,9 @@ export class AuthSignInComponent implements OnInit {
   messages: Message[] | undefined;
   usersPermissionsLoginInput: LoginInput = { email: '', password: ''};
   fields: Array<FormlyFieldConfig> = [ {
-
     fieldGroup: [
       {
-        key: 'identifier',
+        key: 'email',
         type: 'input-text',
         className: 'w-full mb-3',
         wrappers: ['panel'],
@@ -112,22 +112,25 @@ export class AuthSignInComponent implements OnInit {
       detail:'messages.errors.login.detail'
     }];
 
-    const token = this.router.routerState.snapshot.root.queryParamMap.get('accessToken');
-    if (token) {
-      localStorage.setItem('token', token);
-      this.router.navigate(['home'])
+    const tokenUrlParam = this.router.routerState.snapshot.root.queryParamMap.get('accessToken');
+
+    if (tokenUrlParam) {
+      localStorage.setItem('token', tokenUrlParam);
+      this.router.navigate([FullRoutesPathEnum.DASHBOARD]).then(r => console.log(r))
+      console.log('login', tokenUrlParam)
     }
   }
 
   onSubmit(model: LoginInput) {
     if(this.form.valid) {
-      // this.store.dispatch(signIn(model));
+      console.log(model)
+      this.store.dispatch(signIn(model));
     } else {
       this.form.markAllAsTouched();
     }
   }
 
   redirectToGoogleLogin() {
-    window.location.href = 'http://localhost:3000/auth/google'
+    window.location.href = environment.socials?.GOOGLE.redirectUrl;
   }
 }
