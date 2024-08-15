@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from "@angular/core";
 import {Router, RouterLink} from "@angular/router";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgIf} from "@angular/common";
@@ -7,7 +7,7 @@ import {DividerModule} from "primeng/divider";
 import {CheckboxModule} from "primeng/checkbox";
 import {ButtonDirective} from "primeng/button";
 import {Message} from "primeng/api";
-import {Observable} from "rxjs";
+import {Observable, Subject, takeUntil} from "rxjs";
 import {Store} from "@ngrx/store";
 import {Ripple} from "primeng/ripple";
 import {LoginInput} from "../../../generated/gql.types";
@@ -15,8 +15,9 @@ import {FullRoutesPathEnum} from "../../core/enums/full-routes-path.enum";
 import {FormlyFieldConfig, FormlyModule} from "@ngx-formly/core";
 import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
 import {signIn} from "../../state/actions/auth.actions";
-import {selectAuthError} from "../../state/selectors/auth.selectors";
+import {selectAuthData, selectAuthError} from "../../state/selectors/auth.selectors";
 import {environment} from "../../../environments/environment";
+import {AuthState} from "../../state/reducers/auth.reducer";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -63,7 +64,8 @@ import {environment} from "../../../environments/environment";
   ],
   standalone: true
 })
-export class AuthSignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit, OnDestroy {
+
   form = new FormGroup({});
   messages: Message[] | undefined;
   usersPermissionsLoginInput: LoginInput = { email: '', password: ''};
@@ -97,12 +99,15 @@ export class AuthSignInComponent implements OnInit {
   @Output() signIn = new EventEmitter<LoginInput>();
   protected readonly FullRoutesPathEnum = FullRoutesPathEnum;
   errorStatus: Observable<boolean>;
+  authState?: Observable<AuthState>;
+  onDestroy$: Subject<boolean> = new Subject();
 
   constructor(
     private store: Store,
     private router: Router,
   ) {
     this.errorStatus = this.store.select(selectAuthError);
+    this.authState = this.store.select(selectAuthData);
   }
 
   ngOnInit() {
@@ -112,22 +117,37 @@ export class AuthSignInComponent implements OnInit {
       detail:'messages.errors.login.detail'
     }];
 
+    this.authState?.pipe(takeUntil(this.onDestroy$)).subscribe( {
+      next: authData => {
+        if(authData && authData.auth && authData.auth.jwt && !authData.err) {
+          localStorage.setItem('token', authData.auth.jwt);
+          this.router.navigate([FullRoutesPathEnum.DASHBOARD]).then(r => console.log(r))
+        }
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    })
+
     const tokenUrlParam = this.router.routerState.snapshot.root.queryParamMap.get('accessToken');
 
     if (tokenUrlParam) {
       localStorage.setItem('token', tokenUrlParam);
       this.router.navigate([FullRoutesPathEnum.DASHBOARD]).then(r => console.log(r))
-      console.log('login', tokenUrlParam)
     }
   }
 
-  onSubmit(model: LoginInput) {
+  onSubmit(loginInput: LoginInput) {
     if(this.form.valid) {
-      console.log(model)
-      this.store.dispatch(signIn(model));
+      this.store.dispatch(signIn(loginInput));
     } else {
       this.form.markAllAsTouched();
     }
+  }
+
+  ngOnDestroy() {
+    this.onDestroy$.next(true);
+    this.onDestroy$.unsubscribe();
   }
 
   redirectToGoogleLogin() {

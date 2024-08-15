@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
-import { MutationResult} from "apollo-angular";
-import { Observable } from "rxjs";
-import { GraphqlLoginServices } from "../core/graphql/graphql-login.services";
-import { FullRoutesPathEnum } from "../core/enums/full-routes-path.enum";
-import { LoginInput, LoginResponse } from "../../generated/gql.types";
+import {Injectable} from '@angular/core';
+import {Router} from "@angular/router";
+import {Apollo, MutationResult} from "apollo-angular";
+import {Observable} from "rxjs";
+import {MutationOptions} from "@apollo/client/core";
+import {FullRoutesPathEnum} from "../core/enums/full-routes-path.enum";
+import {LoginInput, LoginResponse, UserCreateInput} from "../../generated/gql.types";
+import {REGISTER_MUTATION, SIGN_IN_MUTATION} from "../core/graphql/queries";
 
 @Injectable({
   providedIn: 'root',
@@ -13,21 +14,47 @@ export class AuthService {
 
   constructor(
     private router: Router,
-    private queriesService: GraphqlLoginServices,
+    private apollo: Apollo
   ) { }
 
   public signIn(loginInput: LoginInput)
     : Observable<MutationResult<{login: LoginResponse}>> {
-    return this.queriesService.mutationLogin(loginInput);
+    return this.mutationLogin(loginInput);
   }
 
   public register(registerInput: LoginInput)
     : Observable<MutationResult<LoginResponse>> {
-    return this.queriesService.mutationRegister(registerInput)
+    return this.mutationRegister(registerInput)
   }
 
   logout(): void {
     localStorage.clear();
     this.router.navigate([FullRoutesPathEnum.SIGN_IN])
+  }
+
+  private mutationLogin(loginInput: LoginInput): Observable<MutationResult<{
+    login: LoginResponse
+  }>> {
+    const mutationOptions: MutationOptions = {
+      mutation: SIGN_IN_MUTATION,
+      variables: {
+        email: loginInput.email,
+        password: loginInput.password
+      },
+      errorPolicy: 'ignore',
+    };
+    return this.apollo.mutate<{ login: LoginResponse }>(mutationOptions)
+  }
+
+  private mutationRegister(registerInput: UserCreateInput): Observable<MutationResult<LoginResponse>> {
+    const mutationOptions: MutationOptions = {
+      mutation: REGISTER_MUTATION,
+      variables: {
+        email: registerInput.email,
+        password: registerInput.password,
+      },
+      errorPolicy: 'ignore',
+    };
+    return this.apollo.mutate<LoginResponse>(mutationOptions)
   }
 }

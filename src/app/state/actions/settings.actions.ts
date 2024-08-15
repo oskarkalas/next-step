@@ -13,5 +13,5 @@ export const loadMeSuccess = createAction (
 );
 
 export const loadMeFailed = createAction (
-  `[${MODULES[MODULE_KEYS.settings].actionsName}] load Me Failed`
+  `[${MODULES[MODULE_KEYS.settings].actionsName}] load Me Fail`
 );

@@ -1,26 +1,23 @@
 import {ApplicationConfig, importProvidersFrom, isDevMode} from '@angular/core';
-import {provideStore} from "@ngrx/store";
-import {provideRouter} from '@angular/router';
-import {provideStoreDevtools} from "@ngrx/store-devtools";
+import {StoreModule} from "@ngrx/store";
+import {RouterModule} from '@angular/router';
+import {HttpHeaders, provideHttpClient} from "@angular/common/http";
 import {provideClientHydration} from '@angular/platform-browser';
-import * as fromState from "./app/state/reducers";
+import {provideAnimations} from "@angular/platform-browser/animations";
+import {provideStoreDevtools} from "@ngrx/store-devtools";
+import {loadDevMessages, loadErrorMessages} from "@apollo/client/dev";
+import {APOLLO_OPTIONS, ApolloModule} from "apollo-angular";
+import {ApolloLink, InMemoryCache} from "@apollo/client/core";
+import {HttpLink} from "apollo-angular/http";
+import {EffectsModule} from "@ngrx/effects";
 import {FormlyModule} from "@ngx-formly/core";
 import {PrimeFieldWrapper} from "./app/components/shared/prime-formly-templates/wrappers/prime-field-wrapper";
 import {PrimeInputType} from "./app/components/shared/prime-formly-templates/types/prime-input-type";
-import {ModulePathsEnum} from "./app/core/enums/module-paths.enum";
-import {HttpLink} from "apollo-angular/http";
-import {ApolloLink, InMemoryCache} from "@apollo/client/core";
-import {HttpHeaders, provideHttpClient} from "@angular/common/http";
-import {APOLLO_OPTIONS, ApolloModule} from "apollo-angular";
 import {environment} from "./environments/environment";
-import {AuthGuard} from "./app/guards/auth.guard";
-import {DashboardComponent} from "./app/components/dashboard/dashboard.component";
-import {AuthContainer} from "./app/components/auth/auth.container";
-import {GraphqlLoginServices} from "./app/core/graphql/graphql-login.services";
-import {provideEffects} from "@ngrx/effects";
 import {AuthEffects} from "./app/state/effects/auth.effects";
-import {loadDevMessages, loadErrorMessages} from "@apollo/client/dev";
-import {provideAnimations} from "@angular/platform-browser/animations";
+import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
+import {appRoutes} from "./app/app.routes";
+import {authReducer} from "./app/state/reducers/auth.reducer";
 
 
 if (isDevMode()) {
@@ -77,30 +74,20 @@ export const appConfig: ApplicationConfig = {
       useFactory: createApollo,
       deps: [HttpLink]
     },
-    GraphqlLoginServices,
     provideAnimations(),
-    provideStore(fromState.reducers, {
-      metaReducers: fromState.metaReducers
-    }),
-    provideEffects([AuthEffects]),
-    importProvidersFrom([FORMLY_SETTINGS, ApolloModule]),
+    importProvidersFrom(
+      RouterModule.forRoot(appRoutes),
+      StoreModule.forRoot({router: routerReducer, authKey: authReducer}),
+      EffectsModule.forRoot([AuthEffects]),
+      StoreRouterConnectingModule.forRoot(),
+      FORMLY_SETTINGS,
+      ApolloModule
+    ),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
       autoPause: true,
       trace: false,
       traceLimit: 75,
-    }),
-    provideRouter([
-    { path: '',
-      redirectTo: ModulePathsEnum.LOGIN,
-      pathMatch: 'full'
-    },
-    { path: ModulePathsEnum.DASHBOARD,
-      component: DashboardComponent,
-      canActivate: [AuthGuard]
-    },
-    { path: ModulePathsEnum.LOGIN,
-      component: AuthContainer}
-])]
+    })]
 };

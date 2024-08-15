@@ -42,8 +42,12 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (tokenUrlParam) {
       localStorage.setItem('token', tokenUrlParam);
       return tokenUrlParam;
+    } else if (localStorage.getItem('token')) {
+      return localStorage.getItem('token');
+    } else {
+      this.navigateToSignIn();
+      return null;
     }
-    return localStorage.getItem('token');
   }
 
   private navigateToSignIn(): void {

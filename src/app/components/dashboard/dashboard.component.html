@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<ng-container *ngIf="(me | async) as currentUser">
+  {{currentUser.firstName}} {{currentUser.lastName}}<br>
+  {{currentUser.email}}<br>
+  {{currentUser.picture}}<br>
+  <ng-container *ngIf="currentUser.picture">
+    <img [src]="currentUser.picture" alt="avatar" [width]="20" height="20" *ngIf="currentUser && currentUser.picture">
+  </ng-container>
+</ng-container>
+<p>
+  <button (click)="logout()">Logout</button>
+</p>
+
