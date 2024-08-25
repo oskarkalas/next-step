@@ -1,5 +1,6 @@
 export enum ModulePathsEnum {
   LOGIN = 'login',
   DASHBOARD = 'dashboard',
-  SETTINGS = 'settings'
+  SETTINGS = 'settings',
+  AUTH = 'auth',
 }

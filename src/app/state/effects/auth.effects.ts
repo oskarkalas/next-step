@@ -7,6 +7,7 @@ import * as authActions from '../actions/auth.actions';
 import {AuthService} from "../../services/auth.service";
 import {MESSAGING_ACTIONS} from "../actions/messages.actions";
 import {MessageCategory} from "../../components/shared/messages/messages.enum";
+import {MessageConfigService} from "../../components/shared/messages/message-config.service";
 
 
 @Injectable({
@@ -20,18 +21,18 @@ export class AuthEffects {
         return this.authService.signIn(payload)
           .pipe(
             tap(result => {
-              if (result.data) {
-                this.store.dispatch(authActions.signInFailed({err: false}));
-              } else {
-                this.store.dispatch(authActions.signInFailed({err: true}));
+              if (!result.data) {
+
+                return this.store.dispatch(authActions.signInFailed({err: true}));
               }
+
             }),
             map(result => (
-              {type: authActions.signInSuccess.type, data: result.data?.login}
+              {type: authActions.signInSuccess.type, data: result.data?.login, err: false}
             )),
             catchError((err) => (
              of(MESSAGING_ACTIONS.addMassage({
-             message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err)
+              message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err)
              })))
              )
           );
@@ -56,11 +57,11 @@ export class AuthEffects {
   //     })
   //   )
   // );
-  private messageConfigService: any;
 
   constructor(
     private actions: Actions,
     private authService: AuthService,
     private store: Store,
+    private messageConfigService: MessageConfigService,
   ) {}
 }

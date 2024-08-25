@@ -10,7 +10,7 @@ export const signIn = createAction (
 
 export const signInSuccess = createAction (
   `[${MODULES[MODULE_KEYS.auth].actionsName}] Sign In Success`,
-  props<{data: LoginResponse}>()
+  props<{data: LoginResponse, err?: boolean}>()
 );
 
 export const signInFailed = createAction (

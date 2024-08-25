@@ -3,9 +3,9 @@ import {Router} from "@angular/router";
 import {Apollo, MutationResult} from "apollo-angular";
 import {Observable} from "rxjs";
 import {MutationOptions} from "@apollo/client/core";
-import {FullRoutesPathEnum} from "../core/enums/full-routes-path.enum";
 import {LoginInput, LoginResponse, UserCreateInput} from "../../generated/gql.types";
 import {REGISTER_MUTATION, SIGN_IN_MUTATION} from "../core/graphql/queries";
+import {ModulePathsEnum} from "../core/enums/module-paths.enum";
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.clear();
-    this.router.navigate([FullRoutesPathEnum.SIGN_IN])
+    this.router.navigate([ModulePathsEnum.AUTH])
   }
 
   private mutationLogin(loginInput: LoginInput): Observable<MutationResult<{

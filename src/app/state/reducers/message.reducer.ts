@@ -23,12 +23,20 @@ export const messagesReducer = createReducer(
 const {
   selectTotal
 } = messagesAdapter.getSelectors();
+
 export const selectMessageState = createFeatureSelector<MessageState>(messagesKey);
 export const selectFilteredMessagesByType = (messageView: MessageView) => createSelector(
   selectMessageState,
   (state: MessageState) => {
     const allMessages = Object.values(state.entities);
-    return allMessages.filter(message => message?.view === messageView);
+    return allMessages.filter(message => message?.view === messageView).map(msg => (
+       {
+        severity: msg?.severity?.toLowerCase(),
+        summary: msg?.message.name,
+        detail: msg?.message.message,
+        id: msg?.id,
+      }
+    ));
   }
 );
 export const selectMessageTotal = selectTotal;

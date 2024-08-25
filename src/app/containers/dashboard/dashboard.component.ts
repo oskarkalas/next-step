@@ -15,7 +15,6 @@ import {AuthService} from "../../services/auth.service";
     AsyncPipe
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
   me: Observable<User | null> | undefined;

@@ -18,6 +18,8 @@ import {AuthEffects} from "./app/state/effects/auth.effects";
 import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
 import {appRoutes} from "./app/app.routes";
 import {authReducer} from "./app/state/reducers/auth.reducer";
+import {messagesReducer} from "./app/state/reducers/message.reducer";
+import {MODULE_KEYS} from "./app/core/enums/module-keys.enum";
 
 
 if (isDevMode()) {
@@ -77,7 +79,11 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(
       RouterModule.forRoot(appRoutes),
-      StoreModule.forRoot({router: routerReducer, authKey: authReducer}),
+      StoreModule.forRoot({
+        [MODULE_KEYS.routes]: routerReducer,
+        [MODULE_KEYS.auth]: authReducer,
+        [MODULE_KEYS.massages]: messagesReducer
+      }),
       EffectsModule.forRoot([AuthEffects]),
       StoreRouterConnectingModule.forRoot(),
       FORMLY_SETTINGS,
