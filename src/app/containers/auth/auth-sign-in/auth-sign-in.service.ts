@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import {FormGroup} from "@angular/forms";
 import {selectAuthData, selectAuthError} from "../../../state/selectors/auth.selectors";
 import {AuthState} from "../../../state/reducers/auth.reducer";
-import {FullRoutesPathEnum} from "../../../core/enums/full-routes-path.enum";
+import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {LoginInput} from "../../../../generated/gql.types";
 import {signIn} from "../../../state/actions/auth.actions";
 import {environment} from "../../../../environments/environment";
@@ -24,7 +24,7 @@ export class AuthSignInService {
     this.authState$.pipe(takeUntil(this.onDestroy$)).subscribe(authData => {
       if (authData && authData.auth && authData.auth.jwt && !authData.err) {
         localStorage.setItem('token', authData.auth.jwt);
-        this.router.navigate([FullRoutesPathEnum.DASHBOARD]);
+        this.router.navigate([RoutesPathsEnum.DASHBOARD]);
       }
     });
   }
@@ -33,7 +33,7 @@ export class AuthSignInService {
     const tokenUrlParam = this.router.routerState.snapshot.root.queryParamMap.get('accessToken');
     if (tokenUrlParam) {
       localStorage.setItem('token', tokenUrlParam);
-      this.router.navigate([FullRoutesPathEnum.DASHBOARD]);
+      this.router.navigate([RoutesPathsEnum.DASHBOARD]);
     }
   }
 

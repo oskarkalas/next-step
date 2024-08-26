@@ -7,6 +7,7 @@ import {settingsKey, settingsReducer} from "../../state/reducers/settings.reduce
 import {AuthLayoutComponent} from "./auth.layout.component";
 import {AuthSignUpComponent} from "./auth-sign-up/auth-sign-up.component";
 import {AuthSignInComponent} from "./auth-sign-in/auth-sign-in.component";
+import {RoutesNamesEnum} from "../../core/enums/routes-names.enum";
 
 export const authRoutes: Route[] = [
   {
@@ -24,11 +25,11 @@ export const authRoutes: Route[] = [
         component: AuthSignInComponent,
       },
       {
-        path: 'sign-in',
+        path: RoutesNamesEnum.SIGN_IN,
         component: AuthSignInComponent,
       },
       {
-        path: 'sign-up',
+        path: RoutesNamesEnum.SIGN_UP,
         component: AuthSignUpComponent,
 
       }

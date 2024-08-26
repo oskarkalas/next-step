@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { LayoutOutletsEnum } from "./layout-outlets.enum";
 import { Observable } from "rxjs";
 import { AuthService } from "../../../services/auth.service";
-import { FullRoutesPathEnum } from "../../../core/enums/full-routes-path.enum";
+import { RoutesPathsEnum } from "../../../core/enums/routes-paths.enum";
 import { selectTitle,} from "../../../state/selectors/router.selectors";
 
 @Component({
@@ -55,12 +55,12 @@ export class DashboardLayoutComponent implements OnInit{
           {
             label: 'Home',
             icon: 'pi pi-home',
-            routerLink: FullRoutesPathEnum.DASHBOARD
+            routerLink: RoutesPathsEnum.DASHBOARD
           },
           {
             label: 'Settings',
             icon: 'pi pi-cog',
-            routerLink: FullRoutesPathEnum.SETTINGS
+            routerLink: RoutesPathsEnum.SETTINGS
           }
         ]
       },

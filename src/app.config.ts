@@ -20,6 +20,7 @@ import {appRoutes} from "./app/app.routes";
 import {authReducer} from "./app/state/reducers/auth.reducer";
 import {messagesReducer} from "./app/state/reducers/message.reducer";
 import {MODULE_KEYS} from "./app/core/enums/module-keys.enum";
+import {PrimeCheckboxType} from "./app/components/shared/prime-formly-templates/types/prime-checkbox-type";
 
 
 if (isDevMode()) {
@@ -35,7 +36,8 @@ const FORMLY_SETTINGS = FormlyModule.forRoot({
     {name: 'panel', component: PrimeFieldWrapper},
   ],
   types: [
-    {name: 'input-text', extends: 'input', component: PrimeInputType, wrappers: ['input-text']}
+    {name: 'input-text', extends: 'input', component: PrimeInputType, wrappers: ['input-text']},
+    {name: 'input-checkbox', extends: 'checkbox', component: PrimeCheckboxType, wrappers: ['input-text']},
   ]
 });
 

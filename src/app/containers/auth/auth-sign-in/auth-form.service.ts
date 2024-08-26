@@ -33,8 +33,16 @@ export class AuthFormService {
               placeholder: 'Enter password',
               required: true,
             }
+          },
+          {
+            key: 'remember',
+            type: 'input-checkbox',
+            wrappers: ['panel'],
+            props: {
+              label: 'Remember me',
+            }
           }
-        ]
+        ],
       }
     ];
   }
