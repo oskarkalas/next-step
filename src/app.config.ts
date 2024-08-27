@@ -2,45 +2,22 @@ import {ApplicationConfig, importProvidersFrom, isDevMode} from '@angular/core';
 import {StoreModule} from "@ngrx/store";
 import {RouterModule} from '@angular/router';
 import {HttpHeaders, provideHttpClient} from "@angular/common/http";
-import {provideClientHydration} from '@angular/platform-browser';
-import {provideAnimations} from "@angular/platform-browser/animations";
 import {provideStoreDevtools} from "@ngrx/store-devtools";
 import {loadDevMessages, loadErrorMessages} from "@apollo/client/dev";
 import {APOLLO_OPTIONS, ApolloModule} from "apollo-angular";
 import {ApolloLink, InMemoryCache} from "@apollo/client/core";
 import {HttpLink} from "apollo-angular/http";
 import {EffectsModule} from "@ngrx/effects";
-import {FormlyModule} from "@ngx-formly/core";
-import {PrimeFieldWrapper} from "./app/components/shared/prime-formly-templates/wrappers/prime-field-wrapper";
-import {PrimeInputType} from "./app/components/shared/prime-formly-templates/types/prime-input-type";
 import {environment} from "./environments/environment";
-import {AuthEffects} from "./app/state/effects/auth.effects";
 import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
 import {appRoutes} from "./app/app.routes";
-import {authReducer} from "./app/state/reducers/auth.reducer";
 import {messagesReducer} from "./app/state/reducers/message.reducer";
 import {MODULE_KEYS} from "./app/core/enums/module-keys.enum";
-import {PrimeCheckboxType} from "./app/components/shared/prime-formly-templates/types/prime-checkbox-type";
-
 
 if (isDevMode()) {
   loadDevMessages();
   loadErrorMessages();
 }
-
-const FORMLY_SETTINGS = FormlyModule.forRoot({
-  validationMessages: [
-    { name: 'required', message: 'This field is required' },
-  ],
-  wrappers: [
-    {name: 'panel', component: PrimeFieldWrapper},
-  ],
-  types: [
-    {name: 'input-text', extends: 'input', component: PrimeInputType, wrappers: ['input-text']},
-    {name: 'input-checkbox', extends: 'checkbox', component: PrimeCheckboxType, wrappers: ['input-text']},
-  ]
-});
-
 
 function createApollo(httpLink: HttpLink) {
   const middleware = new ApolloLink((operation, forward) => {
@@ -71,24 +48,20 @@ function createApollo(httpLink: HttpLink) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideClientHydration(),
     provideHttpClient(),
     {
       provide: APOLLO_OPTIONS,
       useFactory: createApollo,
       deps: [HttpLink]
     },
-    provideAnimations(),
     importProvidersFrom(
       RouterModule.forRoot(appRoutes),
       StoreModule.forRoot({
         [MODULE_KEYS.routes]: routerReducer,
-        [MODULE_KEYS.auth]: authReducer,
         [MODULE_KEYS.massages]: messagesReducer
       }),
-      EffectsModule.forRoot([AuthEffects]),
+      EffectsModule.forRoot([]),
       StoreRouterConnectingModule.forRoot(),
-      FORMLY_SETTINGS,
       ApolloModule
     ),
     provideStoreDevtools({

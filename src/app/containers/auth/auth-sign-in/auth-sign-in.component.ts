@@ -13,8 +13,6 @@ import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
 import {AuthSignInService} from "./auth-sign-in.service";
 import {AuthFormService} from "./auth-form.service";
 import {LoginInput} from "../../../../generated/gql.types";
-import {ContainerPathsEnum} from "../../../core/enums/container-paths.enum";
-import {RoutesNamesEnum} from "../../../core/enums/routes-names.enum";
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -84,6 +82,4 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
   }
 
   protected readonly FullRoutesPathEnum = RoutesPathsEnum;
-  protected readonly ModulePathsEnum = ContainerPathsEnum;
-  protected readonly RoutesNamesEnum = RoutesNamesEnum;
 }
