@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {RouterLink, RouterModule} from "@angular/router";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
-import {NgIf} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {MessagesModule} from "primeng/messages";
 import {DividerModule} from "primeng/divider";
 import {CheckboxModule} from "primeng/checkbox";
 import {ButtonDirective} from "primeng/button";
 import {Ripple} from "primeng/ripple";
-import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {FormlyModule} from "@ngx-formly/core";
+import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
 import {AuthSignInService} from "./auth-sign-in.service";
 import {AuthFormService} from "./auth-form.service";
@@ -49,10 +49,11 @@ import {LoginInput} from "../../../../generated/gql.types";
     FormlyModule,
     NgIf,
     FormlyBootstrapModule,
+    AsyncPipe,
   ],
   standalone: true
 })
-export class AuthSignInComponent implements OnInit, OnDestroy {
+export class AuthSignInComponent implements OnInit {
   loginForm: FormGroup;
   fields = this.authFormService.getFormFields();
   loginInput = { email: '', password: '' };
@@ -75,10 +76,6 @@ export class AuthSignInComponent implements OnInit, OnDestroy {
 
   redirectToGoogleLogin() {
     this.authSignInService.redirectToGoogleLogin();
-  }
-
-  ngOnDestroy() {
-    this.authSignInService.ngOnDestroy();
   }
 
   protected readonly FullRoutesPathEnum = RoutesPathsEnum;

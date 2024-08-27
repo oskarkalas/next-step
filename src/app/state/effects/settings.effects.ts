@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {of, tap} from 'rxjs';
+import {of} from 'rxjs';
 import {catchError, exhaustMap, map} from 'rxjs/operators';
 import * as profileActions from '../actions/settings.actions';
 import {SettingsService} from "../../services/settings.service";
@@ -13,7 +13,6 @@ export class SettingsEffects {
       exhaustMap(() => {
         return this.profileService.queryMe()
           .pipe(
-            tap(rs => {console.log(rs)}),
             map(me => (
               {type: profileActions.loadMeSuccess.type, me: me.data?.Me}
             )),

@@ -12,7 +12,8 @@ import {PrimeFieldWrapper} from "../../components/shared/prime-formly-templates/
 import {PrimeInputType} from "../../components/shared/prime-formly-templates/types/prime-input-type";
 import {PrimeCheckboxType} from "../../components/shared/prime-formly-templates/types/prime-checkbox-type";
 import {authKey, authReducer} from "../../state/reducers/auth.reducer";
-import {provideAnimations} from "@angular/platform-browser/animations";
+import {AuthEffects} from "../../state/effects/auth.effects";
+import {MessagesModule} from "primeng/messages";
 
 
 const FORMLY_SETTINGS = FormlyModule.forRoot({
@@ -32,11 +33,11 @@ export const authRoutes: Route[] = [
   {
     path: '',
     providers: [
-      provideAnimations(),
       importProvidersFrom(
         StoreModule.forFeature(authKey, authReducer),
-        EffectsModule.forFeature([SettingsEffects]),
+        EffectsModule.forFeature([AuthEffects, SettingsEffects]),
         FORMLY_SETTINGS,
+        MessagesModule
       ),
     ],
     component: AuthLayoutComponent,

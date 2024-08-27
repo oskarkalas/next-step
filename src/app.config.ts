@@ -13,6 +13,7 @@ import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
 import {appRoutes} from "./app/app.routes";
 import {messagesReducer} from "./app/state/reducers/message.reducer";
 import {MODULE_KEYS} from "./app/core/enums/module-keys.enum";
+import {provideAnimations} from "@angular/platform-browser/animations";
 
 if (isDevMode()) {
   loadDevMessages();
@@ -48,6 +49,7 @@ function createApollo(httpLink: HttpLink) {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    provideAnimations(),
     provideHttpClient(),
     {
       provide: APOLLO_OPTIONS,

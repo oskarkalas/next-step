@@ -1,39 +1,38 @@
-import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormGroup} from "@angular/forms";
-import {selectAuthData, selectAuthError} from "../../../state/selectors/auth.selectors";
+import {Store} from '@ngrx/store';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {selectAuthData} from "../../../state/selectors/auth.selectors";
 import {AuthState} from "../../../state/reducers/auth.reducer";
 import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {LoginInput} from "../../../../generated/gql.types";
 import {signIn} from "../../../state/actions/auth.actions";
 import {environment} from "../../../../environments/environment";
 
-
 @Injectable({ providedIn: 'root' })
 export class AuthSignInService {
-  private onDestroy$ = new Subject<boolean>();
-  errorStatus$: Observable<boolean> = this.store.select(selectAuthError);
   authState$: Observable<AuthState> = this.store.select(selectAuthData);
 
   constructor(private store: Store, private router: Router) {}
 
   handleAuthState(): void {
-    this.authState$.pipe(takeUntil(this.onDestroy$)).subscribe(authData => {
-      if (authData && authData.auth && authData.auth.jwt && !authData.err) {
-        localStorage.setItem('token', authData.auth.jwt);
-        this.router.navigate([RoutesPathsEnum.DASHBOARD]);
-      }
-    });
+    this.authState$.pipe(
+      map((authState: AuthState) => {
+        if (authState && authState.auth && authState.auth.jwt && !authState.err) {
+          localStorage.setItem('token', authState.auth.jwt);
+          window.location.href = RoutesPathsEnum.DASHBOARD;
+        }
+      })
+    );
   }
 
   checkTokenUrlParam(): void {
     const tokenUrlParam = this.router.routerState.snapshot.root.queryParamMap.get('accessToken');
     if (tokenUrlParam) {
       localStorage.setItem('token', tokenUrlParam);
-      this.router.navigate([RoutesPathsEnum.DASHBOARD]);
+      window.location.href = RoutesPathsEnum.DASHBOARD;
     }
   }
 
@@ -47,10 +46,5 @@ export class AuthSignInService {
 
   redirectToGoogleLogin(): void {
     window.location.href = environment.socials?.GOOGLE.redirectUrl;
-  }
-
-  ngOnDestroy() {
-    this.onDestroy$.next(true);
-    this.onDestroy$.unsubscribe();
   }
 }
