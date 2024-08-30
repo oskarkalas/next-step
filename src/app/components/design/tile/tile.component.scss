@@ -1,11 +1,6 @@
-.tile {
-  .header {
-    color: green;
-  }
-  .body {
-    color: red;
-  }
-  .footer {
-    color: yellow;
-  }
+.ns-tile {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  width: 500px;
 }

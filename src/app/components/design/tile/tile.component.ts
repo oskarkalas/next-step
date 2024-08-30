@@ -4,7 +4,12 @@ import { Component } from '@angular/core';
   selector: 'app-tile',
   standalone: true,
   imports: [],
-  templateUrl: './tile.component.html',
+  template:
+    `
+    <div class="ns-tile">
+        <ng-content></ng-content>
+    </div>
+  `,
   styleUrl: './tile.component.scss'
 })
 export class TileComponent {

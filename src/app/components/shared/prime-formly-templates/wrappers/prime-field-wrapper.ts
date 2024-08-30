@@ -5,10 +5,10 @@ import {NgIf} from "@angular/common";
 @Component({
   selector: 'formly-wrapper-panel',
   template: `
-    <div class="formly-wrapper-panel" [class]="customClass">
-      <div class="formly-wrapper-panel-label"><label>{{ props.label }}</label></div>
-      <div class="w-full">
-        <ng-container #fieldComponent></ng-container>
+    <div class="wrapper-panel" [class]="customClass">
+      <label>{{ props.label }}</label>
+      <div class="item-wrapper">
+        <div><ng-container #fieldComponent></ng-container></div>
         <small class="p-error" *ngIf="formControl.touched">
           <formly-validation-message #validationMessage [field]="field"></formly-validation-message>
         </small>

@@ -8,13 +8,14 @@ import {RouterOutlet} from "@angular/router";
     RouterOutlet
   ],
   template: `
-    <div class="pageLayoutWrapper" style="height: 100vh; border: 1px solid red; margin: 0">
+    <div class="pageLayoutWrapper">
       <div class="top">top menu</div>
       <div class="main">
         <router-outlet></router-outlet>
       </div>
       <div class="bottom">footer</div>
     </div>
-  `
+  `,
+  styleUrl: "./auth.layout.component.scss"
 })
 export class AuthLayoutComponent {}

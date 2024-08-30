@@ -13,11 +13,12 @@ import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
 import {AuthSignInService} from "./auth-sign-in.service";
 import {AuthFormService} from "./auth-form.service";
 import {LoginInput} from "../../../../generated/gql.types";
+import {TileComponent} from "../../../components/design/tile/tile.component";
 
 @Component({
   selector: 'app-auth-sign-in',
   template: `
-    <div>
+    <app-tile>
       <div>
         <h1>Welcome Back</h1>
         <h2>
@@ -35,7 +36,7 @@ import {LoginInput} from "../../../../generated/gql.types";
       <div>
         <button (click)="redirectToGoogleLogin()">Login with google</button>
       </div>
-    </div>
+    </app-tile>
   `,
   imports: [
     RouterLink,
@@ -50,6 +51,7 @@ import {LoginInput} from "../../../../generated/gql.types";
     NgIf,
     FormlyBootstrapModule,
     AsyncPipe,
+    TileComponent,
   ],
   standalone: true
 })
