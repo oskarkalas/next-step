@@ -19,6 +19,7 @@ export class AuthFormService {
             wrappers: ['panel'],
             props: {
               label: 'Email',
+              value: 'email@email.com',
               placeholder: 'Enter email',
               required: true,
             }
@@ -29,6 +30,7 @@ export class AuthFormService {
             wrappers: ['panel'],
             props: {
               type: 'password',
+              value: 'ferda123',
               label: 'Password',
               placeholder: 'Enter password',
               required: true,

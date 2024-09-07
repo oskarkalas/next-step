@@ -41,6 +41,7 @@ export class AuthService {
         email: loginInput.email,
         password: loginInput.password
       },
+      fetchPolicy: 'no-cache',
       errorPolicy: 'ignore',
     };
     return this.apollo.mutate<{ login: LoginResponse }>(mutationOptions)
@@ -54,6 +55,7 @@ export class AuthService {
         password: registerInput.password,
       },
       errorPolicy: 'ignore',
+      fetchPolicy: 'no-cache',
     };
     return this.apollo.mutate<LoginResponse>(mutationOptions)
   }

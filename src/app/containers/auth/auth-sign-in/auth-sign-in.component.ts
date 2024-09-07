@@ -1,11 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {RouterLink, RouterModule} from "@angular/router";
 import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {MessagesModule} from "primeng/messages";
 import {DividerModule} from "primeng/divider";
 import {CheckboxModule} from "primeng/checkbox";
-import {ButtonDirective} from "primeng/button";
+import {ButtonModule} from "primeng/button";
 import {Ripple} from "primeng/ripple";
 import {FormlyModule} from "@ngx-formly/core";
 import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
@@ -14,29 +14,37 @@ import {AuthSignInService} from "./auth-sign-in.service";
 import {AuthFormService} from "./auth-form.service";
 import {LoginInput} from "../../../../generated/gql.types";
 import {TileComponent} from "../../../components/design/tile/tile.component";
+import { Observable, Subscription} from "rxjs";
+import {Store} from "@ngrx/store";
+import {AuthState} from "../../../state/reducers/auth.reducer";
+import {selectAuthData} from "../../../state/selectors/auth.selectors";
+import {CardModule} from "primeng/card";
 
 @Component({
   selector: 'app-auth-sign-in',
   template: `
-    <app-tile>
-      <div>
-        <h1>Welcome Back</h1>
-        <h2>
+    <p-card [header]="'Welcome Back'">
+
+        <p>
           <span>Don't have an account? </span>
           <a [routerLink]="[FullRoutesPathEnum.SIGN_UP]">Create today!</a>
-        </h2>
-      </div>
+        </p>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginInput)">
         <formly-form [form]="loginForm" [fields]="fields" [model]="loginInput"></formly-form>
         <div>
           <a [routerLink]="[FullRoutesPathEnum.FORGOT_PASSWORD]">Forgot password?</a>
         </div>
-        <button pButton pRipple type="submit" label="Sign In"></button>
+        <p>
+          <p-button type="submit" label="Sign In"></p-button>
+        </p>
+
       </form>
+        <hr>
       <div>
         <button (click)="redirectToGoogleLogin()">Login with google</button>
       </div>
-    </app-tile>
+    </p-card>
   `,
   imports: [
     RouterLink,
@@ -45,31 +53,43 @@ import {TileComponent} from "../../../components/design/tile/tile.component";
     MessagesModule,
     DividerModule,
     CheckboxModule,
-    ButtonDirective,
+    ButtonModule,
     Ripple,
     FormlyModule,
     NgIf,
     FormlyBootstrapModule,
     AsyncPipe,
     TileComponent,
+    CardModule,
   ],
   standalone: true
 })
-export class AuthSignInComponent implements OnInit {
+export class AuthSignInComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
   fields = this.authFormService.getFormFields();
-  loginInput = { email: '', password: '' };
+  loginInput = { email: 'oskar.kalas4@seznam.cz', password: 'ferda123' };
+  loginStatus$: Observable<AuthState> | undefined;
+  loginSub: Subscription = new Subscription()
 
   constructor(
     private authFormService: AuthFormService,
     private authSignInService: AuthSignInService,
+    private store: Store
   ) {
     this.loginForm = this.authFormService.createForm();
+    this.loginStatus$ = this.store.select(selectAuthData);
   }
 
   ngOnInit() {
-    this.authSignInService.handleAuthState();
     this.authSignInService.checkTokenUrlParam();
+    this.authSignInService.handleAuthState();
+    this.loginSub.add(
+      this.loginStatus$?.subscribe(status => {
+        if(status?.auth?.jwt) {
+          this.authSignInService.redirectToDashboard(status.auth.jwt);
+        }
+      })
+    );
   }
 
   onSubmit(loginInput: LoginInput) {
@@ -78,6 +98,10 @@ export class AuthSignInComponent implements OnInit {
 
   redirectToGoogleLogin() {
     this.authSignInService.redirectToGoogleLogin();
+  }
+
+  ngOnDestroy() {
+    this.loginSub.unsubscribe();
   }
 
   protected readonly FullRoutesPathEnum = RoutesPathsEnum;

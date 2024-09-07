@@ -2,6 +2,7 @@ import { createReducer, on } from "@ngrx/store";
 import { MODULE_KEYS } from "../../core/enums/module-keys.enum";
 import {signInFailed, signInSuccess} from "../actions/auth.actions";
 import {LoginResponse} from "../../../generated/gql.types";
+import {RoutesPathsEnum} from "../../core/enums/routes-paths.enum";
 
 export interface AuthState {
   auth: LoginResponse | null

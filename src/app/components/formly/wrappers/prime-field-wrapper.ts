@@ -4,12 +4,13 @@ import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'formly-wrapper-panel',
+  styleUrls: ['./prime-field-wrapper.scss'],
   template: `
-    <div class="wrapper-panel" [class]="customClass">
-      <label>{{ props.label }}</label>
+    <div class="formlyWrapper-panel" [class]="customClass">
+      <label class="formlyWrapper-label">{{ props.label }}</label>
       <div class="item-wrapper">
         <div><ng-container #fieldComponent></ng-container></div>
-        <small class="p-error" *ngIf="formControl.touched">
+        <small class="item-wrapper-errorMsg" *ngIf="formControl.touched">
           <formly-validation-message #validationMessage [field]="field"></formly-validation-message>
         </small>
       </div>

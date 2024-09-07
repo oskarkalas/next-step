@@ -6,11 +6,12 @@ import {RouterOutlet} from "@angular/router";
 import {MessagesModule} from "primeng/messages";
 import {Store} from "@ngrx/store";
 import {selectFilteredMessagesByType} from "./state/reducers/message.reducer";
-import {Message} from "primeng/api";
+import {PrimeNGConfig, ToastMessageOptions} from "primeng/api";
 import {MessageView} from "./components/shared/messages/messages.enum";
 import {MESSAGING_ACTIONS} from "./state/actions/messages.actions";
 import {MessageToastComponent} from "./components/shared/messages/message-toast.component";
 import {ToastCloseEvent} from "primeng/toast";
+import {Aura} from "primeng/themes/aura";
 
 @Component({
   selector: 'app-root',
@@ -36,9 +37,11 @@ import {ToastCloseEvent} from "primeng/toast";
 })
 export class AppComponent {
   public onlineOffline: Observable<boolean>;
-  protected messages: Observable<Array<Message>>;
+  protected messages: Observable<Array<ToastMessageOptions>>;
 
-  constructor(private store: Store,) {
+  constructor(private store: Store, private config: PrimeNGConfig) {
+    this.config.theme.set({ preset: Aura });
+    this.config.ripple.set(true);
     // online offline check
     this.onlineOffline = merge(of(navigator.onLine),
       fromEvent(window, 'online').pipe(map(() => true)),

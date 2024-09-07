@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup} from "@angular/forms";
 import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
+import {Observable, tap} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {selectAuthData} from "../../../state/selectors/auth.selectors";
 import {AuthState} from "../../../state/reducers/auth.reducer";
@@ -46,5 +46,10 @@ export class AuthSignInService {
 
   redirectToGoogleLogin(): void {
     window.location.href = environment.socials?.GOOGLE.redirectUrl;
+  }
+
+  redirectToDashboard(token: string): void {
+    localStorage.setItem('token', token);
+    window.location.href = RoutesPathsEnum.DASHBOARD;
   }
 }

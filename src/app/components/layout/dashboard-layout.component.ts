@@ -3,9 +3,9 @@ import { MenuItem } from "primeng/api";
 import { Store } from "@ngrx/store";
 import { LayoutOutletsEnum } from "./layout-outlets.enum";
 import { Observable } from "rxjs";
-import { AuthService } from "../../../services/auth.service";
-import { RoutesPathsEnum } from "../../../core/enums/routes-paths.enum";
-import { selectTitle,} from "../../../state/selectors/router.selectors";
+import { AuthService } from "../../services/auth.service";
+import { RoutesPathsEnum } from "../../core/enums/routes-paths.enum";
+import { selectTitle,} from "../../state/selectors/router.selectors";
 
 @Component({
   selector: 'app-dashboard-layout',

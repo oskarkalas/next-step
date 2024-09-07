@@ -22,41 +22,21 @@ export class AuthEffects {
           .pipe(
             tap(result => {
               if (!result.data) {
-
                 return this.store.dispatch(authActions.signInFailed({err: true}));
               }
-
             }),
             map(result => (
               {type: authActions.signInSuccess.type, data: result.data?.login, err: false}
             )),
             catchError((err) => (
-             of(MESSAGING_ACTIONS.addMassage({
-              message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err)
-             })))
+             of(MESSAGING_ACTIONS.addMassage(
+               { message: this.messageConfigService.getConfigData(MessageCategory.NETWORK_ERROR, err) }
+              )))
              )
           );
       })
     )
   );
-  //
-  // registerUser = createEffect(() => this.actions.pipe(
-  //     ofType(authActions.registerUser),
-  //     exhaustMap((payload) => {
-  //       return this.authService.register(payload)
-  //         .pipe(
-  //           tap(result => {
-  //           }),
-  //           map(result => (
-  //             {type: authActions.registerUserSuccess.type, data: result.data}
-  //           )),
-  //           catchError((err) => (
-  //             of(authActions.registerUserFailed(err)))
-  //           )
-  //         );
-  //     })
-  //   )
-  // );
 
   constructor(
     private actions: Actions,
