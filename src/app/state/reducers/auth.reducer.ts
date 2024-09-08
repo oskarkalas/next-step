@@ -1,17 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
 import { MODULE_KEYS } from "../../core/enums/module-keys.enum";
-import {signInFailed, signInSuccess} from "../actions/auth.actions";
+import {signIn, signInFailed, signInSuccess} from "../actions/auth.actions";
 import {LoginResponse} from "../../../generated/gql.types";
-import {RoutesPathsEnum} from "../../core/enums/routes-paths.enum";
 
 export interface AuthState {
   auth: LoginResponse | null
   err: boolean
+  loading: boolean;
 }
 
 export const initialState: AuthState = {
   auth: null,
-  err: false
+  err: false,
+  loading: false,
 }
 
 export const authKey = MODULE_KEYS.auth;
@@ -22,10 +23,16 @@ export const authReducer = createReducer(
     {
       ...state,
       auth: auth.data,
+      loading: false,
     }
   )),
+  on(signIn, (state) => ({
+    ...state,
+    loading: true
+  })),
   on(signInFailed, (state, err) => ({
     ...state,
-    ...err
+    ...err,
+    loading: false
   }))
 )

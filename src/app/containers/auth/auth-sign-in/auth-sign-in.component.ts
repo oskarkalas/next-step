@@ -14,7 +14,6 @@ import {FormlyModule} from "@ngx-formly/core";
 import {FormlyBootstrapModule} from "@ngx-formly/bootstrap";
 import {AuthFormService} from "./auth-form.service";
 import {LoginInput} from "../../../../generated/gql.types";
-import {TileComponent} from "../../../components/design/tile/tile.component";
 import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {AuthState} from "../../../state/reducers/auth.reducer";
 import {selectAuthData} from "../../../state/selectors/auth.selectors";
@@ -23,7 +22,7 @@ import {AuthSignInService} from "./auth-sign-in.service";
 @Component({
   selector: 'app-auth-sign-in',
   template: `
-    <p-card [header]="'Welcome Back'" [style]="{width: '350px'}">
+    <p-card [header]="'Sign In'" [style]="{width: '350px'}">
       <p>
         <span>Don't have an account? </span>
         <a [routerLink]="[FullRoutesPathEnum.SIGN_UP]">Create today!</a>
@@ -33,21 +32,23 @@ import {AuthSignInService} from "./auth-sign-in.service";
         <p>
           <a [routerLink]="[FullRoutesPathEnum.FORGOT_PASSWORD]">Forgot password?</a>
         </p>
-          <p-button
-            type="submit"
-            [raised]="true"
-            [style]="{width: '100%'}"
-            [label]="'Sign In'">
-          </p-button>
-      </form>
-      <p-divider />
         <p-button
-          [icon]="'pi pi-google'"
-          [style]="{width: '100%'}"
-          (click)="redirectToGoogleLogin()"
+          type="submit"
+          [loading]="(loginStatus$ | async)?.loading"
+          [icon]="'pi pi-lock'"
           [raised]="true"
-          [severity]="'secondary'"
-          [label]="'Login with google'"></p-button>
+          [style]="{width: '100%'}"
+          [label]="'Sign In'">
+        </p-button>
+      </form>
+      <p-divider/>
+      <p-button
+        [icon]="'pi pi-google'"
+        [style]="{width: '100%'}"
+        (click)="redirectToGoogleLogin()"
+        [raised]="true"
+        [severity]="'secondary'"
+        [label]="'Login with Google'"></p-button>
     </p-card>
   `,
   imports: [
@@ -63,7 +64,6 @@ import {AuthSignInService} from "./auth-sign-in.service";
     NgIf,
     FormlyBootstrapModule,
     AsyncPipe,
-    TileComponent,
     CardModule,
   ],
   standalone: true

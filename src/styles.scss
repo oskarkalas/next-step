@@ -42,5 +42,6 @@ body {
   height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  background: linear-gradient(180deg, rgba(80,214,141,1) 0%, rgba(33,84,125,1) 100%);
+  background-size: 100vw 100vh;
 }

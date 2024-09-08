@@ -1,15 +1,17 @@
 import {Component} from "@angular/core";
 import {RouterOutlet} from "@angular/router";
+import {MenuComponent} from "../../components/menu/menu.component";
 
 @Component({
   selector: "app-auth",
   standalone: true,
   imports: [
-    RouterOutlet
+    RouterOutlet,
+    MenuComponent
   ],
   template: `
     <div class="pageLayoutWrapper">
-      <div class="top">top menu</div>
+      <div class="top"><app-menubar></app-menubar></div>
       <div class="main">
         <router-outlet></router-outlet>
       </div>
