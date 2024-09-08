@@ -36,14 +36,6 @@ export class AuthFormService {
               required: true,
             }
           },
-          {
-            key: 'remember',
-            type: 'input-checkbox',
-            wrappers: ['panel'],
-            props: {
-              label: 'Remember me',
-            }
-          }
         ],
       }
     ];
