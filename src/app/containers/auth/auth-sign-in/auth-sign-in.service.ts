@@ -2,13 +2,13 @@ import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormGroup} from "@angular/forms";
 import {Store} from '@ngrx/store';
-import {Observable, tap} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {selectAuthData} from "../../../state/selectors/auth.selectors";
 import {AuthState} from "../../../state/reducers/auth.reducer";
 import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {LoginInput} from "../../../../generated/gql.types";
-import {signIn} from "../../../state/actions/auth.actions";
+import {AUTH_ACTIONS} from "../../../state/actions/auth.actions";
 import {environment} from "../../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
@@ -38,7 +38,7 @@ export class AuthSignInService {
 
   signInStart(loginInput: LoginInput, form: FormGroup): void {
     if (form.valid) {
-      this.store.dispatch(signIn(loginInput));
+      this.store.dispatch(AUTH_ACTIONS.signIn(loginInput));
     } else {
       form.markAllAsTouched();
     }
