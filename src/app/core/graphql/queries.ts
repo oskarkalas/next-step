@@ -12,20 +12,21 @@ export const SIGN_IN_MUTATION: DocumentNode = gql`
       }
     }
   }
-`
+`;
+
 export const REGISTER_MUTATION: DocumentNode = gql`
-    mutation registerNewUser($password: String!, $email: String!) {
-      registerNewUser(
-        loginInput: {email: $email, password: $password}
-      ) {
-        jwt,
-        user {
-          id,
-          email
-        }
+  mutation registerNewUser($password: String!, $email: String!) {
+    registerNewUser(
+      loginInput: {email: $email, password: $password}
+    ) {
+      jwt,
+      user {
+        id,
+        email
       }
     }
-`
+  }
+`;
 
 export const ME_QUERY: DocumentNode = gql`
   query me {
@@ -33,4 +34,4 @@ export const ME_QUERY: DocumentNode = gql`
       email, role, firstName, lastName, picture
     }
   }
-`
+`;
