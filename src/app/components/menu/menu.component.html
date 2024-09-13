@@ -11,7 +11,7 @@
     </ng-template>
   }
   <ng-template pTemplate="center">
-    @for (menuItem of menuConfig?.items; track menuItem.id) {
+    @for (menuItem of menuConfig?.items; track menuItem.label) {
       <p-button [label]="menuItem.label" text plain />
     } @empty {
       There are no items.
