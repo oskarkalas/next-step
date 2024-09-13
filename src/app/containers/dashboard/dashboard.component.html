@@ -1,12 +1,16 @@
-<ng-container *ngIf="(me | async) as currentUser">
-  {{currentUser.firstName}} {{currentUser.lastName}}<br>
-  {{currentUser.email}}<br>
-  {{currentUser.picture}}<br>
-  <ng-container *ngIf="currentUser.picture">
-    <img [src]="currentUser.picture" alt="avatar" [width]="150" [height]="150" *ngIf="currentUser && currentUser.picture">
+<app-layout>
+  <ng-container slot-menu>
+    <app-menubar [menuConfig]="menuConfig | async"></app-menubar>
   </ng-container>
-</ng-container>
-<p>
-  <button (click)="logout()">Logout</button>
-</p>
+  <ng-container slot-content>
+      <p>
+        <button (click)="logout()">Logout</button>
+      </p>
+  </ng-container>
+  <ng-container slot-footer>
+    footer
+  </ng-container>
+</app-layout>
+
+
 

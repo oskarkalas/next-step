@@ -1,25 +1,29 @@
-<div class="card">
-  <p-menubar [model]="items">
-    <ng-template pTemplate="item" let-item>
-      <ng-container *ngIf="item.route; else urlRef">
-        <a [routerLink]="item.route" class="p-menubar-item-link">
-          <span [class]="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      </ng-container>
-      <ng-template #urlRef>
-        <a *ngIf="item.url; else noLink" [href]="item.url" class="p-menubar-item-link">
-          <span [class]="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-        </a>
-      </ng-template>
-      <ng-template #noLink>
-        <div class="p-menubar-item-link">
-          <span [class]="item.icon"></span>
-          <span class="ml-2">{{ item.label }}</span>
-          <span class="pi pi-fw pi-angle-down ml-2"></span>
-        </div>
-      </ng-template>
+<p-toolbar aria-label="Top menu" [style]="{ 'border-radius': '0', 'width': '100%' }">
+  @if (menuConfig?.logo) {
+    <ng-template pTemplate="start">
+      <a [href]="menuConfig?.logo?.url">
+      @if(menuConfig?.logo?.imageUrl) {
+        <img ngSrc="{{menuConfig?.logo?.imageUrl}}" [alt]="menuConfig?.logo?.name" fill>
+      } @else {
+        <span>{{menuConfig?.logo?.name}}</span>
+      }
+      </a>
     </ng-template>
-  </p-menubar>
-</div>
+  }
+  <ng-template pTemplate="center">
+    @for (menuItem of menuConfig?.items; track menuItem.id) {
+      <p-button [label]="menuItem.label" text plain />
+    } @empty {
+      There are no items.
+    }
+  </ng-template>
+  <ng-template pTemplate="end">
+    @if (menuConfig?.user) {
+      @if(menuConfig?.user?.picture) {
+        <p-avatar shape="circle" [image]="menuConfig?.user?.picture"/>
+      } @else {
+       <p-avatar [label]="getInitialFromName(menuConfig?.user)" shape="circle"  [icon]="'pi pi-user'"></p-avatar>
+      }
+    }
+  </ng-template>
+</p-toolbar>

@@ -11,7 +11,7 @@ import {MenuComponent} from "../../components/menu/menu.component";
   ],
   template: `
     <div class="pageLayoutWrapper">
-      <div class="top"><app-menubar></app-menubar></div>
+      <div class="top"></div>
       <div class="main">
         <router-outlet></router-outlet>
       </div>

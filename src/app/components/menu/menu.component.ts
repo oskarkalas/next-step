@@ -1,57 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { MenubarModule } from 'primeng/menubar';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {Component, Input} from '@angular/core';
+import {ToolbarModule} from "primeng/toolbar";
+import {AvatarModule} from "primeng/avatar";
+import {MenuItem, SharedModule} from "primeng/api";
+import {ButtonModule} from "primeng/button";
+import {User} from "../../../generated/gql.types";
+import {NgOptimizedImage} from "@angular/common";
+
+export interface MenuConfigModel  {
+  logo?: {
+    name: string;
+    url?: string;
+    imageUrl?: string;
+  }
+  items?: Array<MenuItem>;
+  settings?: Array<MenuItem>;
+  user?: User | null
+}
 
 @Component({
   selector: 'app-menubar',
   templateUrl: './menu.component.html',
   standalone: true,
-  imports: [MenubarModule, CommonModule],
+  imports: [ToolbarModule, AvatarModule, SharedModule, ButtonModule, NgOptimizedImage]
 })
-export class MenuComponent implements OnInit {
-  items: MenuItem[] | undefined;
+export class MenuComponent {
+  @Input() menuConfig?: MenuConfigModel | null;
 
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Router',
-        icon: 'pi pi-palette',
-        items: [
-          {
-            label: 'Installation',
-            route: '/installation'
-          },
-          {
-            label: 'Configuration',
-            route: '/configuration'
-          }
-        ]
-      },
-      {
-        label: 'Programmatic',
-        icon: 'pi pi-link',
-        command: () => {
-          this.router.navigate(['/installation']);
-        }
-      },
-      {
-        label: 'External',
-        icon: 'pi pi-home',
-        items: [
-          {
-            label: 'Angular',
-            url: 'https://angular.io/'
-          },
-          {
-            label: 'Vite.js',
-            url: 'https://vitejs.dev/'
-          }
-        ]
-      }
-    ];
+  getInitialFromName(user: User | null | undefined): string {
+    if(user?.lastName && user?.firstName) {
+      return (user?.firstName.slice(0,1) + user?.lastName.slice(0,1)).toUpperCase();
+    } else {
+      return 'U';
+    }
   }
 }
