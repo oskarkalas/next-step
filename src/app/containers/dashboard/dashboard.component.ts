@@ -13,6 +13,7 @@ import {
   SecondaryDrawerConfigModel
 } from "../../components/layout/drawer/drawer-secondary.component";
 import {AuthService} from "../../services/auth.service";
+import {RouterOutlet} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -22,7 +23,8 @@ import {AuthService} from "../../services/auth.service";
     AsyncPipe,
     LayoutComponent,
     MenuComponent,
-    DrawerSecondaryComponent
+    DrawerSecondaryComponent,
+    RouterOutlet
   ],
   templateUrl: './dashboard.component.html',
 })
