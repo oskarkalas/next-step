@@ -3,9 +3,12 @@
     <app-menubar [menuConfig]="menuConfig | async"></app-menubar>
   </ng-container>
   <ng-container slot-content>
-      <p>
-        <button (click)="logout()">Logout</button>
-      </p>
+    main content
+  </ng-container>
+  <ng-container slot-secondary-toolbar>
+    <app-secondary-drawer
+      [drawerConfig]="drawerConfigData | async">
+    </app-secondary-drawer>
   </ng-container>
   <ng-container slot-footer>
     footer

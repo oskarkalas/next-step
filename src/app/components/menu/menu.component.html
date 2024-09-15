@@ -18,12 +18,8 @@
     }
   </ng-template>
   <ng-template pTemplate="end">
-    @if (menuConfig?.user) {
-      @if(menuConfig?.user?.picture) {
-        <p-avatar shape="circle" [image]="menuConfig?.user?.picture"/>
-      } @else {
-       <p-avatar [label]="getInitialFromName(menuConfig?.user)" shape="circle"  [icon]="'pi pi-user'"></p-avatar>
-      }
-    }
+    <app-user-avatar [userData]="menuConfig?.user"
+                     (click)="drawersService.secondaryDrawerToggle()">
+    </app-user-avatar>
   </ng-template>
 </p-toolbar>

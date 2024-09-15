@@ -5,10 +5,13 @@ import {Observable, take} from "rxjs";
 import {User} from "../../../generated/gql.types";
 import {selectSettingsMe} from "../../state/selectors/settings.selectors";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {AuthService} from "../../services/auth.service";
 import {LayoutComponent} from "../../components/layout/layout.component";
 import {MenuComponent, MenuConfigModel} from "../../components/menu/menu.component";
 import {map} from "rxjs/operators";
+import {
+  DrawerSecondaryComponent,
+  SecondaryDrawerConfigModel
+} from "../../components/layout/drawer/drawer-secondary.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -17,14 +20,15 @@ import {map} from "rxjs/operators";
     NgIf,
     AsyncPipe,
     LayoutComponent,
-    MenuComponent
+    MenuComponent,
+    DrawerSecondaryComponent
   ],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
   me: Observable<User | null> | undefined;
 
-  constructor(private store: Store, private authService: AuthService) {
+  constructor(private store: Store) {
     store.dispatch(SETTINGS_ACTIONS.loadMe());
   }
 
@@ -32,12 +36,8 @@ export class DashboardComponent implements OnInit {
     this.me = this.store.select(selectSettingsMe);
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
   get menuConfig(): Observable<MenuConfigModel | null> | undefined {
-    return  this.me?.pipe(
+    return this.me?.pipe(
       take(1),
       map(me => {
         return {
@@ -55,9 +55,20 @@ export class DashboardComponent implements OnInit {
               route: "about"
             }
           ],
-          user: me,
+          user: me || undefined,
         }
       })
+    )
+  }
+
+  get drawerConfigData(): Observable<SecondaryDrawerConfigModel | null> | undefined {
+    return this.me?.pipe(
+      take(1),
+      map(me => (
+        {
+          user: me || undefined
+        }
+      ))
     )
   }
 }

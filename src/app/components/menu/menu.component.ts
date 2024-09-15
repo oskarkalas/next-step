@@ -1,10 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, inject, Input} from '@angular/core';
 import {ToolbarModule} from "primeng/toolbar";
 import {AvatarModule} from "primeng/avatar";
 import {MenuItem, SharedModule} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {User} from "../../../generated/gql.types";
 import {NgOptimizedImage} from "@angular/common";
+import {DrawerService} from "../layout/drawer/drawer.service";
+import {UserAvatarComponent} from "../design/user-avatar/user-avatar.component";
 
 export interface MenuConfigModel  {
   logo?: {
@@ -21,16 +23,9 @@ export interface MenuConfigModel  {
   selector: 'app-menubar',
   templateUrl: './menu.component.html',
   standalone: true,
-  imports: [ToolbarModule, AvatarModule, SharedModule, ButtonModule, NgOptimizedImage]
+  imports: [ToolbarModule, AvatarModule, SharedModule, ButtonModule, NgOptimizedImage, UserAvatarComponent]
 })
 export class MenuComponent {
   @Input() menuConfig?: MenuConfigModel | null;
-
-  getInitialFromName(user: User | null | undefined): string {
-    if(user?.lastName && user?.firstName) {
-      return (user?.firstName.slice(0,1) + user?.lastName.slice(0,1)).toUpperCase();
-    } else {
-      return 'U';
-    }
-  }
+  public drawersService = inject(DrawerService);
 }

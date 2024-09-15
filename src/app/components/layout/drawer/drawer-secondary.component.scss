@@ -1,0 +1,32 @@
+.secDrawer {
+
+  &-container {
+    padding: 16px;
+  }
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+
+    &-user {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      &-content {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        strong {
+          font-weight: bold;
+        }
+        span {
+          font-size: 14px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+}

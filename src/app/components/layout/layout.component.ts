@@ -15,6 +15,9 @@ import { Component } from '@angular/core';
       <div class="slotToolbar">
         <ng-content select="[slot-toolbar]"></ng-content>
       </div>
+      <div class="slotSecondaryToolbar">
+        <ng-content select="[slot-secondary-toolbar]"></ng-content>
+      </div>
       <div class="slotContent">
         <ng-content select="[slot-content]"></ng-content>
       </div>
