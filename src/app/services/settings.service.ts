@@ -14,7 +14,9 @@ export class SettingsService {
   public queryMe(): Observable<ApolloQueryResult<{Me: User}>> {
     const queryOptions: QueryOptions = {
       query: ME_QUERY,
-      errorPolicy: 'ignore',
+      errorPolicy: 'all',
+      fetchPolicy: "cache-first",
+      pollInterval: 0
     };
     return this.apollo.query<{Me: User}>(queryOptions)
   }

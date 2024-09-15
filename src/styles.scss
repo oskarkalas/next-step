@@ -1,47 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap');
 @import "primeicons/primeicons.css";
-.roboto-regular {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.roboto-bold {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.roboto-black {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.roboto-regular-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.roboto-bold-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-
-h1 {
-  @extend .roboto-bold;
-}
 
 body {
   padding: 0;
   margin: 0;
-  @extend .roboto-regular;
+  font-family: "system-ui", "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+  font-size: 14px;
   height: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(180deg, rgba(80,214,141,1) 0%, rgba(33,84,125,1) 100%);
-  background-size: 100vw 100vh;
 }

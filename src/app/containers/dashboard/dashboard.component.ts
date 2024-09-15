@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {SETTINGS_ACTIONS} from "../../state/actions/settings.actions";
 import {Observable, take} from "rxjs";
@@ -12,6 +12,7 @@ import {
   DrawerSecondaryComponent,
   SecondaryDrawerConfigModel
 } from "../../components/layout/drawer/drawer-secondary.component";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -26,19 +27,31 @@ import {
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent implements OnInit {
-  me: Observable<User | null> | undefined;
+  me$: Observable<User | null> | undefined;
+  authService: AuthService = inject(AuthService);
+  private config: SecondaryDrawerConfigModel = {items: []};
+  private menuConfig: MenuConfigModel = {items: []};
 
   constructor(private store: Store) {
     store.dispatch(SETTINGS_ACTIONS.loadMe());
   }
 
   ngOnInit(): void {
-    this.me = this.store.select(selectSettingsMe);
+    this.me$ = this.store.select(selectSettingsMe);
+    this.drawerConfigData();
+    this.createMenuConfig();
   }
 
-  get menuConfig(): Observable<MenuConfigModel | null> | undefined {
-    return this.me?.pipe(
-      take(1),
+  get drawerConfig(): SecondaryDrawerConfigModel {
+    return this.config;
+  }
+  get menuConfigData(): MenuConfigModel {
+    return this.menuConfig;
+  }
+
+  private createMenuConfig(): void {
+     this.me$?.pipe(
+      take(2),
       map(me => {
         return {
           logo: {
@@ -58,17 +71,32 @@ export class DashboardComponent implements OnInit {
           user: me || undefined,
         }
       })
-    )
+    ).subscribe(menu => this.menuConfig = menu);
   }
 
-  get drawerConfigData(): Observable<SecondaryDrawerConfigModel | null> | undefined {
-    return this.me?.pipe(
-      take(1),
+  private drawerConfigData() {
+    this.me$?.pipe(
+      take(2),
       map(me => (
         {
-          user: me || undefined
+          user: me || undefined,
+          items: [
+            {
+              icon: 'pi pi-cog',
+              label: "Settings",
+            },
+            {
+              icon: 'pi pi-sign-out',
+              label: "Logout",
+              command: () => {
+                this.authService.logout();
+              }
+            }
+          ]
         }
-      ))
-    )
+      )),
+    ).subscribe(config =>
+      this.config = config
+    );
   }
 }

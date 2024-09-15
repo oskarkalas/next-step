@@ -40,8 +40,9 @@ function createApollo(httpLink: HttpLink) {
     connectToDevTools: true,
     defaultOptions : {
       watchQuery : {
-        fetchPolicy : 'network-only',
-        errorPolicy : 'all'
+        fetchPolicy : 'cache-first',
+        errorPolicy : 'all',
+        pollInterval: false
       }
     }
   };

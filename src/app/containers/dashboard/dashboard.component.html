@@ -1,13 +1,15 @@
 <app-layout>
   <ng-container slot-menu>
-    <app-menubar [menuConfig]="menuConfig | async"></app-menubar>
+    <app-menubar
+      [menuConfig]="menuConfigData">
+    </app-menubar>
   </ng-container>
   <ng-container slot-content>
     main content
   </ng-container>
   <ng-container slot-secondary-toolbar>
     <app-secondary-drawer
-      [drawerConfig]="drawerConfigData | async">
+      [drawerConfig]="drawerConfig">
     </app-secondary-drawer>
   </ng-container>
   <ng-container slot-footer>

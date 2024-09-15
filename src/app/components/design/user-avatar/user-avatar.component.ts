@@ -11,8 +11,8 @@ import {User} from "../../../../generated/gql.types";
   template: `
     <div class="userAvatar">
       @if (userData) {
-        @if(userData?.picture) {
-          <p-avatar shape="circle" [image]="userData?.picture"/>
+        @if(userData.picture) {
+          <p-avatar shape="circle" [image]="userData.picture"/>
         } @else {
           <p-avatar [label]="getInitialFromName(userData)"
                     shape="circle"
@@ -28,7 +28,7 @@ export class UserAvatarComponent {
 
   getInitialFromName(user: User | null | undefined): string {
     if(user?.lastName && user?.firstName) {
-      return (user?.firstName.slice(0,1) + user?.lastName.slice(0,1)).toUpperCase();
+      return (user.firstName.slice(0,1) + user?.lastName.slice(0,1)).toUpperCase();
     } else {
       return 'U';
     }

@@ -1,13 +1,14 @@
 .secDrawer {
+  font-size: 18px;
 
   &-container {
     padding: 16px;
   }
+
   &-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
-
 
     &-user {
       display: flex;
@@ -18,13 +19,20 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
+        font-size: 16px;
+        line-height: 24px;
+      }
+    }
+  }
 
-        strong {
-          font-weight: bold;
-        }
-        span {
-          font-size: 14px;
-          font-weight: 300;
+  &-menu {
+    ::ng-deep .p-menu {
+      border: none !important;
+
+      ul {
+        li {
+          font-size: 16px;
+          line-height: 24px;
         }
       }
     }
