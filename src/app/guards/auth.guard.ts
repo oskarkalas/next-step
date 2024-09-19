@@ -3,8 +3,8 @@ import { CanActivate, CanActivateChild, Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
-import { RoutesPathsEnum } from "../core/enums/routes-paths.enum";
 import { environment } from "../../environments/environment";
+import { ContainerPathsEnum } from "../core/enums/container-paths.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   private navigateToSignIn(): void {
-    this.router.navigate([RoutesPathsEnum.SIGN_IN]);
+    window.location.href = '/' + ContainerPathsEnum.AUTH;
   }
 
   private validateToken(accessToken: string): Observable<boolean> {
