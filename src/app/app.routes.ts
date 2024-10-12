@@ -11,6 +11,11 @@ export const appRoutes: Route[] = [
     pathMatch: 'full'
   },
   {
+    path: 'auth/callback',
+    redirectTo: ContainerPathsEnum.AUTH,
+    pathMatch: 'full'
+  },
+  {
     path: ContainerPathsEnum.DASHBOARD,
     loadChildren: () => import('./containers/dashboard/dashboard.routes').then(route => route.dashboardRoutes),
     canActivate: [AuthGuard]

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {FieldType, FieldTypeConfig} from '@ngx-formly/core';
@@ -9,8 +9,8 @@ import {FieldType, FieldTypeConfig} from '@ngx-formly/core';
     <input [formControl]="formControl"
            [type]="props.type || 'text'"
            [id]="key"
-           [style.width]="width"
-           [placeholder]="props.placeholder"
+           [style.width]="props.width ?? '100%'"
+           [placeholder]="props?.placeholder ? props.placeholder : ''"
            pInputText >
   `,
   imports: [
@@ -19,6 +19,4 @@ import {FieldType, FieldTypeConfig} from '@ngx-formly/core';
   ],
   standalone: true
 })
-export class PrimeInputType extends FieldType<FieldTypeConfig> {
-  @Input() width: string = '100%';
-}
+export class PrimeInputType extends FieldType<FieldTypeConfig> {}

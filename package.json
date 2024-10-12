@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "gql-codegen": "graphql-codegen --config graphql-codegen.yml"
+    "start": "nx serve",
+    "build": "nx build",
+    "watch": "nx build --watch --configuration development",
+    "test": "nx test",
+    "gql-codegen": "graphql-codegen --config graphql-codegen.yml",
+    "start-storybook": "nx run next-step:storybook"
   },
   "private": true,
   "dependencies": {
@@ -34,17 +35,37 @@
     "npm": "^10.8.3",
     "primeicons": "^7.0.0",
     "primeng": "18.0.0-beta.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.7"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.0.6",
+    "@angular-devkit/core": "~18.0.6",
+    "@angular-devkit/schematics": "~18.0.6",
     "@angular/cli": "~18.0.6",
     "@angular/compiler-cli": "^18.0.5",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript-apollo-angular": "^4.0.0",
     "@ngx-formly/schematics": "^6.3.5",
+    "@nx/angular": "19.8.4",
+    "@nx/js": "19.8.4",
+    "@nx/storybook": "19.8.4",
+    "@nx/web": "19.8.4",
+    "@nx/workspace": "19.8.4",
+    "@schematics/angular": "~18.0.6",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-interactions": "^8.2.9",
+    "@storybook/angular": "^8.2.9",
+    "@storybook/core-server": "^8.2.9",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/test-runner": "^0.13.0",
+    "@storybook/testing-library": "^0.2.2",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
@@ -52,6 +73,11 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "nx": "19.8.4",
+    "prettier": "^2.6.2",
+    "storybook": "^8.3.5",
+    "ts-node": "10.9.1",
     "typescript": "~5.4.5"
-  }
+  },
+  "nx": {}
 }

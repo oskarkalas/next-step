@@ -1,4 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import {AvatarModule} from "primeng/avatar";
 import {User} from "../../../../generated/gql.types";
 
@@ -9,24 +15,27 @@ import {User} from "../../../../generated/gql.types";
     AvatarModule
   ],
   template: `
-    <div class="userAvatar">
-      @if (userData) {
-        @if(userData.picture) {
-          <p-avatar shape="circle" [image]="userData.picture"/>
-        } @else {
-          <p-avatar [label]="getInitialFromName(userData)"
-                    shape="circle"
-                    [icon]="'pi pi-user'">
-          </p-avatar>
-        }
-      }
+    <div class="userAvatar" #userImgAvatar>
+      <p-avatar shape="circle"
+                size="normal"
+                [image]="userData?.picture"
+                [label]="!userData?.picture ? getInitialFromName(userData) : ''" />
     </div>
   `
 })
-export class UserAvatarComponent {
- @Input() userData?: User | null;
+export class UserAvatarComponent implements AfterViewInit {
+  @Input() userData?: Partial<User> | null;
+  @ViewChild('userImgAvatar') userImgAvatar: ElementRef<HTMLElement> | undefined
+  avatarComplete: boolean | undefined;
 
-  getInitialFromName(user: User | null | undefined): string {
+
+  ngAfterViewInit() {
+    const imgElement: HTMLImageElement | undefined = this.userImgAvatar?.nativeElement?.getElementsByTagName('img')[0];
+    // check if is complete loaded image from external source
+    this.avatarComplete = !!imgElement?.complete;
+  }
+
+  getInitialFromName(user: Partial<User> | null | undefined): string {
     if(user?.lastName && user?.firstName) {
       return (user.firstName.slice(0,1) + user?.lastName.slice(0,1)).toUpperCase();
     } else {
