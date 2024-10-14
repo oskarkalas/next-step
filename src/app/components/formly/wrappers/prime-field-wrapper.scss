@@ -1,11 +1,43 @@
+//@import "abstract";
+
 .formlyWrapper {
   &-panel {
     margin-top: 15px;
     margin-bottom: 15px;
   }
 
+  &-content {
+    display: flex;
+    flex-direction: column;
+  }
+
   &-label {
     display: inline-block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+  }
+}
+
+::ng-deep {
+  .itemsGroup {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+    .checkboxWrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    &-vertical {
+      flex-direction: column;
+    }
+
+    &-horizontal {
+      .checkboxWrapper {
+        gap: 6px;
+      }
+
+      flex-direction: row;
+    }
   }
 }

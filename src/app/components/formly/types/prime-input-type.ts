@@ -9,8 +9,8 @@ import {FieldType, FieldTypeConfig} from '@ngx-formly/core';
     <input [formControl]="formControl"
            [type]="props.type || 'text'"
            [id]="key"
-           [style.width]="props.width ?? '100%'"
-           [placeholder]="props?.placeholder ? props.placeholder : ''"
+           [style.width]="props['width'] || '100%'"
+           [placeholder]="props.placeholder || ''"
            pInputText >
   `,
   imports: [

@@ -48,7 +48,7 @@ function createApollo(httpLink: HttpLink) {
   };
 }
 
-export const appConfig: ApplicationConfig = {
+export const bootstrapConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideHttpClient(),

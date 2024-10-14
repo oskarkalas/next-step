@@ -7,9 +7,13 @@ import {NgIf} from "@angular/common";
   styleUrls: ['./prime-field-wrapper.scss'],
   template: `
     <div class="formlyWrapper-panel" [class]="customClass">
-      <label class="formlyWrapper-label">{{ props.label }}</label>
-      <div class="item-wrapper">
-        <div><ng-container #fieldComponent></ng-container></div>
+      @if (props['group']) {
+        <strong class="formlyWrapper-label-group">{{ props.label }}</strong>
+      } @else {
+        <label class="formlyWrapper-label" [for]="key">{{ props.label }}</label>
+      }
+      <div class="formlyWrapper-content">
+        <ng-container #fieldComponent></ng-container>
         <small class="item-wrapper-errorMsg" *ngIf="formControl.touched">
           <formly-validation-message #validationMessage [field]="field"></formly-validation-message>
         </small>

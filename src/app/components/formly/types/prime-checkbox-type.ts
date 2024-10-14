@@ -8,10 +8,11 @@ import {CheckboxModule} from "primeng/checkbox";
   template: `
       <p-checkbox
         [id]="key"
-        [value]="0"
-        [binary]="false"
-        [formControl]="formControl"></p-checkbox>
-<!--      {{formControl.value}}value-->
+        [binary]="props['binary'] || true"
+        [name]="props['name']"
+        [disabled]="props.disabled || false"
+        [formControl]="formControl">
+      </p-checkbox>
   `,
   imports: [
     ReactiveFormsModule,
