@@ -60,7 +60,8 @@ export const AutoComplete: Story = {
       props: {
         label: 'AutoComplete',
         required: true,
-        placeholder: 'Enter email',
+        dropdown: true,
+        placeholder: 'start typing',
       }
     }]
   },
