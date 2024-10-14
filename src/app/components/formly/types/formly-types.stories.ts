@@ -61,6 +61,7 @@ export const AutoComplete: Story = {
         label: 'AutoComplete',
         required: true,
         dropdown: true,
+        minLength: 3,
         placeholder: 'start typing',
       }
     }]
