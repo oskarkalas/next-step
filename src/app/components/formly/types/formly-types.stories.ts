@@ -8,6 +8,8 @@ import { PrimeCheckboxType } from './prime-checkbox-type';
 import { EmailFormlyValidator } from '../validators/formly-validators';
 import { PrimeFieldCheckboxWrapper } from '../wrappers/prime-field-checkbox-wrapper';
 import { PrimeAutocompleteFormlyType } from './prime-autocomplete.formly.type';
+import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { signal, Signal } from '@angular/core';
 
 const meta: Meta = {
   title: 'Forms/formly/types',
@@ -41,7 +43,7 @@ const meta: Meta = {
       <div style="opacity: .5">
        <hr />
       model: {{ model  | json}}
-</div>
+      </div>
     `)
   ],
 };
@@ -49,20 +51,26 @@ const meta: Meta = {
 export default meta;
 
 type Story = StoryObj;
+// Create a signal for suggestions
+const suggestionsSignal = signal<Array<string>>([]);
 
 export const AutoComplete: Story = {
   args: {
+    model: {autocomplete: ""},
     fields: [{
       key: 'autocomplete',
       type: 'prime-autocomplete',
       wrappers: ['panel'],
-      required: true,
       props: {
         label: 'AutoComplete',
-        required: true,
-        dropdown: true,
         minLength: 3,
         placeholder: 'start typing',
+        complete: (event: AutoCompleteCompleteEvent) => {
+          const newSuggestions = [...Array(10).keys()].map(item => `${event.query}-${item}`);
+          suggestionsSignal.set(newSuggestions);
+          console.log('AutoComplete complete suggestions', suggestionsSignal());
+        },
+        suggestions: suggestionsSignal(),
       }
     }]
   },

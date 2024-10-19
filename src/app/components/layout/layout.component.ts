@@ -25,6 +25,7 @@ import { Component } from '@angular/core';
         <ng-content select="[slot-footer]"></ng-content>
       </div>
     </div>
+    layout works!
   `
 })
 export class LayoutComponent {}

@@ -8,6 +8,10 @@ function provideTheme(config: PrimeNGConfig) {
   return () => {
     config.theme.set({
       preset: Aura,
+      options: {
+        dark: false,
+        darkModeSelector: 'light-mode',
+      }
     });
   };
 }

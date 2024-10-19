@@ -7,8 +7,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
   selector: 'formly-primeng-autocomplete',
   template: `
     <p-autoComplete
-      [inputId]="key"
-      [(ngModel)]="props.selelectedItem"
+      [formControl]="formControl"
+      [inputId]="key.toString()"
       [minLength]="props.minLength"
       [delay]="props.delay || 300"
       [style]="props.style"
@@ -28,6 +28,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
       [disabled]="props.disabled || false"
       [showClear]="props.showClear || false"
       (completeMethod)="props?.complete($event)" />
+    {{props.suggestions}}
   `,
   imports: [
     ReactiveFormsModule,

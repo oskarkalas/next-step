@@ -11,7 +11,7 @@ import {MessageView} from "./components/shared/messages/messages.enum";
 import {MESSAGING_ACTIONS} from "./state/actions/messages.actions";
 import {MessageToastComponent} from "./components/shared/messages/message-toast.component";
 import {ToastCloseEvent} from "primeng/toast";
-import {Aura} from "primeng/themes/aura";
+import { PRIMENG_THEME_PRESET } from './config/primeng-theme-preset';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +40,12 @@ export class AppComponent {
   protected messages: Observable<Array<ToastMessageOptions>>;
 
   constructor(private store: Store, private config: PrimeNGConfig) {
-    this.config.theme.set({ preset: Aura });
+    this.config.theme.set({
+      preset: PRIMENG_THEME_PRESET,
+      options: {
+        darkModeSelector: 'light-mode',
+      }
+    });
     this.config.ripple.set(true);
     // online offline check
     this.onlineOffline = merge(of(navigator.onLine),

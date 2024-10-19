@@ -18,6 +18,7 @@ import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
 import {AuthState} from "../../../state/reducers/auth.reducer";
 import {selectAuthData} from "../../../state/selectors/auth.selectors";
 import {AuthSignInService} from "./auth-sign-in.service";
+import { ButtonComponent } from '../../../components/atoms/button/button.component';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -32,23 +33,27 @@ import {AuthSignInService} from "./auth-sign-in.service";
         <p>
           <a [routerLink]="[FullRoutesPathEnum.FORGOT_PASSWORD]">Forgot password?</a>
         </p>
-        <p-button
-          type="submit"
-          [loading]="(loginStatus$ | async)?.loading"
-          [icon]="'pi pi-lock'"
-          [raised]="true"
-          [style]="{width: '100%'}"
-          [label]="'Sign In'">
-        </p-button>
+        <app-button
+          [buttonProps]="{
+          type: 'submit',
+          label: 'Sign In',
+          icon: 'pi pi-lock',
+          style: {width: '100%'},
+          size: 'large',
+          loading: (loginStatus$ | async)?.loading }"
+          [full]="true"
+          >
+        </app-button>
       </form>
       <p-divider/>
-      <p-button
-        [icon]="'pi pi-google'"
-        [style]="{width: '100%'}"
+      <app-button
         (click)="redirectToGoogleLogin()"
-        [raised]="true"
-        [severity]="'secondary'"
-        [label]="'Login with Google'"></p-button>
+        [buttonProps]="{
+          label: 'Login with Google',
+          icon: 'pi pi-google',
+          style: {width: '100%'},
+          severity: 'contrast'}"
+        [full]="true"></app-button>
     </p-card>
   `,
   imports: [
@@ -65,6 +70,7 @@ import {AuthSignInService} from "./auth-sign-in.service";
     FormlyBootstrapModule,
     AsyncPipe,
     CardModule,
+    ButtonComponent
   ],
   standalone: true
 })
