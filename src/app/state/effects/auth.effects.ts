@@ -5,8 +5,8 @@ import {of, tap} from 'rxjs';
 import {catchError, exhaustMap, map} from 'rxjs/operators';
 import {AuthService} from "../../services/auth.service";
 import {MESSAGING_ACTIONS} from "../actions/messages.actions";
-import {MessageCategory} from "../../components/shared/messages/messages.enum";
-import {MessageConfigService} from "../../components/shared/messages/message-config.service";
+import {MessageCategory} from "../../components/molecules/messages/messages.enum";
+import {MessageConfigService} from "../../components/molecules/messages/message-config.service";
 import {AUTH_ACTIONS} from "../actions/auth.actions";
 
 

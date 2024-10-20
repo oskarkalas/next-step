@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { LeftSideComponent } from './left-side.component';
+import { MenuComponent } from './menu.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 
-const meta: Meta<LeftSideComponent> = {
-  component: LeftSideComponent,
-  title: 'LeftSideComponent',
+const meta: Meta<MenuComponent> = {
+  component: MenuComponent,
+  title: 'Molecules/Menu/MenuComponent',
 };
 export default meta;
-type Story = StoryObj<LeftSideComponent>;
+type Story = StoryObj<MenuComponent>;
 
 export const Primary: Story = {
   args: {},
@@ -19,6 +19,6 @@ export const Heading: Story = {
   args: {},
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/left-side works!/gi)).toBeTruthy();
+    expect(canvas.getByText(/menu works!/gi)).toBeTruthy();
   },
 };

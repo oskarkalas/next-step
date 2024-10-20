@@ -1,7 +1,7 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { MODULE_KEYS } from "../../core/enums/module-keys.enum";
-import { MessageModel, MessageView } from "../../components/shared/messages/messages.enum";
+import { MessageModel, MessageView } from "../../components/molecules/messages/messages.enum";
 import { MESSAGING_ACTIONS } from "../actions/messages.actions";
 
 export interface MessageState extends EntityState<MessageModel>{}

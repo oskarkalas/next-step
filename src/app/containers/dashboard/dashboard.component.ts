@@ -6,7 +6,7 @@ import {User} from "../../../generated/gql.types";
 import {selectSettingsMe} from "../../state/selectors/settings.selectors";
 import {AsyncPipe, NgIf} from "@angular/common";
 import {LayoutComponent} from "../../components/layout/layout.component";
-import {MenuComponent, MenuConfigModel} from "../../components/menu/menu.component";
+import {MenuComponent, MenuConfigModel} from "../../components/molecules/menu/menu.component";
 import {map} from "rxjs/operators";
 import {
   DrawerSecondaryComponent,

@@ -1,5 +1,5 @@
 import { createActionGroup, props } from "@ngrx/store";
-import { MessageModel } from "../../components/shared/messages/messages.enum";
+import { MessageModel } from "../../components/molecules/messages/messages.enum";
 
 export const MESSAGING_ACTIONS = createActionGroup({
   source: 'MESSAGING',

@@ -4,7 +4,7 @@ import {DrawerService} from "./drawer.service";
 import {MenuItem, SharedModule} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {User} from "../../../../generated/gql.types";
-import {UserAvatarComponent} from "../../design/user-avatar/user-avatar.component";
+import {UserAvatarComponent} from "../../atoms/user-avatar/user-avatar.component";
 import {DividerModule} from "primeng/divider";
 import {MenuModule} from "primeng/menu";
 

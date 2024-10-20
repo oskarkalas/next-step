@@ -3,10 +3,10 @@ import {ToolbarModule} from "primeng/toolbar";
 import {AvatarModule} from "primeng/avatar";
 import {MenuItem, SharedModule} from "primeng/api";
 import {ButtonModule} from "primeng/button";
-import {User} from "../../../generated/gql.types";
+import {User} from "../../../../generated/gql.types";
 import {NgOptimizedImage} from "@angular/common";
-import {DrawerService} from "../layout/drawer/drawer.service";
-import {UserAvatarComponent} from "../design/user-avatar/user-avatar.component";
+import {DrawerService} from "../../layout/drawer/drawer.service";
+import {UserAvatarComponent} from "../../atoms/user-avatar/user-avatar.component";
 
 export interface MenuConfigModel  {
   logo?: {

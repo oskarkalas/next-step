@@ -7,9 +7,9 @@ import {MessagesModule} from "primeng/messages";
 import {Store} from "@ngrx/store";
 import {selectFilteredMessagesByType} from "./state/reducers/message.reducer";
 import {PrimeNGConfig, ToastMessageOptions} from "primeng/api";
-import {MessageView} from "./components/shared/messages/messages.enum";
+import {MessageView} from "./components/molecules/messages/messages.enum";
 import {MESSAGING_ACTIONS} from "./state/actions/messages.actions";
-import {MessageToastComponent} from "./components/shared/messages/message-toast.component";
+import {MessageToastComponent} from "./components/molecules/messages/message-toast.component";
 import {ToastCloseEvent} from "primeng/toast";
 import { PRIMENG_THEME_PRESET } from './config/primeng-theme-preset';
 

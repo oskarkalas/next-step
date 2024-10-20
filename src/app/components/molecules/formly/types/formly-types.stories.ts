@@ -9,10 +9,10 @@ import { EmailFormlyValidator } from '../validators/formly-validators';
 import { PrimeFieldCheckboxWrapper } from '../wrappers/prime-field-checkbox-wrapper';
 import { PrimeAutocompleteFormlyType } from './prime-autocomplete.formly.type';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
-import { signal, Signal } from '@angular/core';
+import { signal } from '@angular/core';
 
 const meta: Meta = {
-  title: 'Forms/formly/types',
+  title: 'Molecules/Forms/formly/types',
   decorators: [
     moduleMetadata({
       imports: [
