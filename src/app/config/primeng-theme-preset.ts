@@ -31,12 +31,20 @@ export const PRIMENG_THEME_PRESET = definePreset(Aura, {
       }
     },
     inputtext: {
-
       colorScheme: {
         light: {
           root: {
             color: 'var(--input-text-color)',
             background: 'var(--input-text-background)',
+            borderColor: 'var(--input-text-border)',
+          }
+        }
+      }
+    },
+    divider: {
+      colorScheme: {
+        light: {
+          root: {
             borderColor: 'var(--input-text-border)',
           }
         }
