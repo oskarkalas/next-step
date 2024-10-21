@@ -33,7 +33,6 @@ export class UserAvatarComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     const imgElement: HTMLImageElement | undefined = this.userImgAvatar?.nativeElement?.getElementsByTagName('img')[0];
-    // check if is complete loaded image from external source
     this.avatarComplete = !imgElement?.complete;
   }
 

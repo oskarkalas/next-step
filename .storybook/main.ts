@@ -6,7 +6,8 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     '@storybook/addon-controls',
-    '@storybook/addon-docs'
+    '@storybook/addon-docs',
+    "storybook-addon-deep-controls"
   ],
   framework: {
     name: '@storybook/angular',
