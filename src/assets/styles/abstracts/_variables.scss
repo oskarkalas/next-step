@@ -1,0 +1,23 @@
+
+
+@layer base {
+  :root {
+    --surface-ground: #293241;
+    --surface-card: #343d4a;
+    --surface-white: #ffffff;
+    --surface-black: #000;
+    --p-avatar-background: #000000;
+    --input-text-background: #293241;
+    --input-text-border: #545b67;
+    --input-text-color: #eaebec;
+    --card-border-radius: 24px;
+  }
+}
+
+$clr_surface-ground: var(--surface-ground);
+$clr_surface-card: var(--surface-ground);
+$clr_surface-white: var(--surface-white);
+$clr_surface-black: var(--surface-black);
+$clr_surface-input-text: var(--input-text-background);
+$clr_surface-input-text-border: var(--input-text-border);
+$clr_surface-input-text-color: var( --input-text-color);

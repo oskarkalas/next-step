@@ -7,6 +7,7 @@ body {
   font-family: "system-ui", "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
   font-size: 14px;
   height: 100%;
-  background-color: white;
+  background-color: $clr_surface-ground;
+  color: $clr_surface-white;
 }
 

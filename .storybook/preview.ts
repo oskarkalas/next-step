@@ -2,14 +2,13 @@ import { APP_INITIALIZER } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { PrimeNGConfig } from 'primeng/api';
-import { Aura } from 'primeng/themes/aura';
+import { PRIMENG_THEME_PRESET } from '../src/app/config/primeng-theme-preset';
 
 function provideTheme(config: PrimeNGConfig) {
   return () => {
     config.theme.set({
-      preset: Aura,
+      preset: PRIMENG_THEME_PRESET,
       options: {
-        dark: false,
         darkModeSelector: 'light-mode',
       }
     });
