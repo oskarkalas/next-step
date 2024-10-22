@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {Store} from "@ngrx/store";
 import {of, tap} from 'rxjs';
 import {catchError, exhaustMap, map} from 'rxjs/operators';
-import {AuthService} from "../../services/auth.service";
+import {AuthService} from "../../core/services/auth.service";
 import {MESSAGING_ACTIONS} from "../actions/messages.actions";
 import {MessageCategory} from "../../components/molecules/messages/messages.enum";
 import {MessageConfigService} from "../../components/molecules/messages/message-config.service";

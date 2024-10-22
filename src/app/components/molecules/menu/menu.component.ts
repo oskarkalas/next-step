@@ -5,7 +5,7 @@ import {MenuItem, SharedModule} from "primeng/api";
 import {ButtonModule} from "primeng/button";
 import {User} from "../../../../generated/gql.types";
 import {NgOptimizedImage} from "@angular/common";
-import {DrawerService} from "../../layout/drawer/drawer.service";
+import {DrawerService} from "../../layouts/drawer/drawer.service";
 import {UserAvatarComponent} from "../../atoms/user-avatar/user-avatar.component";
 
 export interface MenuConfigModel  {

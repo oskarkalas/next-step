@@ -1,16 +1,16 @@
-import { APP_INITIALIZER } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { PrimeNGConfig } from 'primeng/api';
-import { PRIMENG_THEME_PRESET } from '../src/app/config/primeng-theme-preset';
+import { presetsConfig, PRIMENG_THEME_PRESET } from '../src/app/configs/primeng-theme-preset';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from '../src/app/app.routes';
 
 function provideTheme(config: PrimeNGConfig) {
   return () => {
     config.theme.set({
       preset: PRIMENG_THEME_PRESET,
-      options: {
-        darkModeSelector: 'light-mode',
-      }
+      ...presetsConfig.options,
     });
   };
 }
@@ -19,6 +19,9 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
+        importProvidersFrom(
+          RouterModule.forRoot(appRoutes),
+        ),
         provideAnimations(),
         {
           provide: APP_INITIALIZER,

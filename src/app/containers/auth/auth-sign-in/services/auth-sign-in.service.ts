@@ -4,12 +4,12 @@ import {FormGroup} from "@angular/forms";
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {selectAuthData} from "../../../state/selectors/auth.selectors";
-import {AuthState} from "../../../state/reducers/auth.reducer";
-import {RoutesPathsEnum} from "../../../core/enums/routes-paths.enum";
-import {LoginInput} from "../../../../generated/gql.types";
-import {AUTH_ACTIONS} from "../../../state/actions/auth.actions";
-import {environment} from "../../../../environments/environment";
+import {selectAuthData} from "../../../../state/selectors/auth.selectors";
+import {AuthState} from "../../../../state/reducers/auth.reducer";
+import {RoutesPathsEnum} from "../../../../core/enums/routes-paths.enum";
+import {LoginInput} from "../../../../../generated/gql.types";
+import {AUTH_ACTIONS} from "../../../../state/actions/auth.actions";
+import {environment} from "../../../../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class AuthSignInService {

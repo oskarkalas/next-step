@@ -5,14 +5,14 @@ import {Observable, take} from "rxjs";
 import {User} from "../../../generated/gql.types";
 import {selectSettingsMe} from "../../state/selectors/settings.selectors";
 import {AsyncPipe, NgIf} from "@angular/common";
-import {LayoutComponent} from "../../components/layout/layout.component";
+import {LayoutComponent} from "../../components/layouts/layout.component";
 import {MenuComponent, MenuConfigModel} from "../../components/molecules/menu/menu.component";
 import {map} from "rxjs/operators";
 import {
   DrawerSecondaryComponent,
   SecondaryDrawerConfigModel
-} from "../../components/layout/drawer/drawer-secondary.component";
-import {AuthService} from "../../services/auth.service";
+} from "../../components/layouts/drawer/drawer-secondary.component";
+import {AuthService} from "../../core/services/auth.service";
 import {RouterOutlet} from "@angular/router";
 
 @Component({

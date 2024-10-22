@@ -3,9 +3,9 @@ import {Router} from "@angular/router";
 import {Apollo, MutationResult} from "apollo-angular";
 import {Observable} from "rxjs";
 import {MutationOptions} from "@apollo/client/core";
-import {LoginInput, LoginResponse, UserCreateInput} from "../../generated/gql.types";
-import {REGISTER_MUTATION, SIGN_IN_MUTATION} from "../core/graphql/queries";
-import {ContainerPathsEnum} from "../core/enums/container-paths.enum";
+import {LoginInput, LoginResponse, UserCreateInput} from "../../../generated/gql.types";
+import {REGISTER_MUTATION, SIGN_IN_MUTATION} from "../graphql/queries";
+import {ContainerPathsEnum} from "../enums/container-paths.enum";
 
 @Injectable({
   providedIn: 'root',

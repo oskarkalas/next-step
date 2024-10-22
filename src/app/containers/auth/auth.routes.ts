@@ -6,7 +6,7 @@ import {SettingsEffects} from "../../state/effects/settings.effects";
 import {FormlyModule} from "@ngx-formly/core";
 import {AuthLayoutComponent} from "./auth.layout.component";
 import {AuthSignUpComponent} from "./auth-sign-up/auth-sign-up.component";
-import {AuthSignInComponent} from "./auth-sign-in/auth-sign-in.component";
+import {AuthSignInContainer} from "./auth-sign-in/auth-sign-in.container";
 import {RoutesNamesEnum} from "../../core/enums/routes-names.enum";
 import {PrimeFieldWrapper} from "../../components/molecules/formly/wrappers/prime-field-wrapper";
 import {PrimeInputType} from "../../components/molecules/formly/types/prime-input-type";
@@ -16,7 +16,7 @@ import {AuthEffects} from "../../state/effects/auth.effects";
 import {MessagesModule} from "primeng/messages";
 
 
-const FORMLY_SETTINGS = FormlyModule.forRoot({
+export const FORMLY_AUTH_CONFIG = FormlyModule.forRoot({
   validationMessages: [
     { name: 'required', message: 'This field is required' },
   ],
@@ -36,7 +36,7 @@ export const authRoutes: Route[] = [
       importProvidersFrom(
         StoreModule.forFeature(authKey, authReducer),
         EffectsModule.forFeature([AuthEffects, SettingsEffects]),
-        FORMLY_SETTINGS,
+        FORMLY_AUTH_CONFIG,
         MessagesModule
       ),
     ],
@@ -44,11 +44,11 @@ export const authRoutes: Route[] = [
     children: [
       {
         path: '',
-        component: AuthSignInComponent,
+        component: AuthSignInContainer,
       },
       {
         path: RoutesNamesEnum.SIGN_IN,
-        component: AuthSignInComponent,
+        component: AuthSignInContainer,
       },
       {
         path: RoutesNamesEnum.SIGN_UP,

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {catchError, exhaustMap, map} from 'rxjs/operators';
-import {SettingsService} from "../../services/settings.service";
+import {SettingsService} from "../../core/services/settings.service";
 import {SETTINGS_ACTIONS} from "../actions/settings.actions";
 
 @Injectable()

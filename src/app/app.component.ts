@@ -1,17 +1,17 @@
-import {Component} from "@angular/core";
-import {fromEvent, merge, Observable, of} from "rxjs";
-import {map} from "rxjs/operators";
-import {AsyncPipe, JsonPipe, NgIf} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
-import {MessagesModule} from "primeng/messages";
-import {Store} from "@ngrx/store";
-import {selectFilteredMessagesByType} from "./state/reducers/message.reducer";
-import {PrimeNGConfig, ToastMessageOptions} from "primeng/api";
-import {MessageView} from "./components/molecules/messages/messages.enum";
-import {MESSAGING_ACTIONS} from "./state/actions/messages.actions";
-import {MessageToastComponent} from "./components/molecules/messages/message-toast.component";
-import {ToastCloseEvent} from "primeng/toast";
-import { PRIMENG_THEME_PRESET } from './config/primeng-theme-preset';
+import { Component, inject } from '@angular/core';
+import { fromEvent, merge, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { MessagesModule } from 'primeng/messages';
+import { ToastCloseEvent } from 'primeng/toast';
+import { Store } from '@ngrx/store';
+import { selectFilteredMessagesByType } from './state/reducers/message.reducer';
+import { PrimeNGConfig, ToastMessageOptions } from 'primeng/api';
+import { MessageView } from './components/molecules/messages/messages.enum';
+import { MESSAGING_ACTIONS } from './state/actions/messages.actions';
+import { MessageToastComponent } from './components/molecules/messages/message-toast.component';
+import { presetsConfig, PRIMENG_THEME_PRESET } from './configs/primeng-theme-preset';
 
 @Component({
   selector: 'app-root',
@@ -30,28 +30,29 @@ import { PRIMENG_THEME_PRESET } from './config/primeng-theme-preset';
                           [position]="'top-right'">
       </app-messages-toast>
       <router-outlet></router-outlet>
-      <ng-container *ngIf="(onlineOffline | async) === false">
+      @if((onlineOffline | async) === false) {
         <span>{{ 'offlineStatusText' }}</span>
-      </ng-container>
+      }
   `
 })
 export class AppComponent {
   public onlineOffline: Observable<boolean>;
   protected messages: Observable<Array<ToastMessageOptions>>;
+  public primeNGConfig: PrimeNGConfig = inject(PrimeNGConfig);
 
-  constructor(private store: Store, private config: PrimeNGConfig) {
-    this.config.theme.set({
+  constructor(private store: Store) {
+    this.primeNGConfig.theme.set({
       preset: PRIMENG_THEME_PRESET,
-      options: {
-        darkModeSelector: 'light-mode',
-      }
+      ...presetsConfig.options,
     });
-    this.config.ripple.set(true);
+    this.primeNGConfig.ripple.set(true);
+
     // online offline check
     this.onlineOffline = merge(of(navigator.onLine),
       fromEvent(window, 'online').pipe(map(() => true)),
       fromEvent(window, 'offline').pipe(map(() => false))
     );
+
     this.messages = this.store.select(selectFilteredMessagesByType(MessageView.TOAST));
   }
 

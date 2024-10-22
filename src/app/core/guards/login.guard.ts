@@ -3,8 +3,8 @@ import { CanActivate, Router } from '@angular/router';
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
-import { environment } from "../../environments/environment";
-import { ContainerPathsEnum } from "../core/enums/container-paths.enum";
+import { environment } from "../../../environments/environment";
+import { ContainerPathsEnum } from "../enums/container-paths.enum";
 
 @Injectable({
   providedIn: 'root'

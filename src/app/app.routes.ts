@@ -1,7 +1,7 @@
-import {Route} from "@angular/router";
-import {ContainerPathsEnum} from "./core/enums/container-paths.enum";
-import {AuthGuard} from "./guards/auth.guard";
-import {LoginGuard} from "./guards/login.guard";
+import { Route } from '@angular/router';
+import { ContainerPathsEnum } from './core/enums/container-paths.enum';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginGuard } from './core/guards/login.guard';
 
 
 export const appRoutes: Route[] = [
