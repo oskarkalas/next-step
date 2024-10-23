@@ -14,9 +14,11 @@ import {NgIf} from "@angular/common";
       }
       <div class="formlyWrapper-content">
         <ng-container #fieldComponent></ng-container>
-        <small class="item-wrapper-errorMsg" *ngIf="formControl.touched">
-          <formly-validation-message #validationMessage [field]="field"></formly-validation-message>
-        </small>
+        @if (formControl.touched) {
+          <small class="formlyWrapper-errorMsg">
+            <formly-validation-message #validationMessage [field]="field"></formly-validation-message>
+          </small>
+        }
       </div>
     </div>
   `,

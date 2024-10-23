@@ -1,4 +1,4 @@
-//@import "abstract";
+@import "../../assets/styles/abstracts";
 
 .formlyWrapper {
   &-panel {
@@ -14,6 +14,11 @@
   &-label {
     display: inline-block;
     margin-bottom: 8px;
+  }
+
+  &-errorMsg {
+    color: $clr_error;
+    margin: 4px 0;
   }
 }
 
@@ -33,11 +38,11 @@
     }
 
     &-horizontal {
+      flex-direction: row;
+
       .checkboxWrapper {
         gap: 6px;
       }
-
-      flex-direction: row;
     }
   }
 }

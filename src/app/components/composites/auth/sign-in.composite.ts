@@ -26,20 +26,14 @@ import { SocialLoginEnum } from '../../../../environments/environment.model';
       </p>
       <form [formGroup]="loginForm!" (ngSubmit)="onSubmit(loginInput)">
         <formly-form [form]="loginForm!" [fields]="fields!" [model]="loginInput"></formly-form>
-        <p>
-          <a [routerLink]="[FullRoutesPathEnum.FORGOT_PASSWORD]">Forgot password?</a>
-        </p>
-        <app-button
-          [buttonProps]="sendButtonProps"
-          [full]="true"
-          >
-        </app-button>
+        <p><a [routerLink]="[FullRoutesPathEnum.FORGOT_PASSWORD]">Forgot password?</a></p>
+        <app-button [buttonProps]="sendButtonProps"></app-button>
       </form>
       <p-divider/>
       <app-button
         (click)="getSocialLogin(SocialLoginEnum.GOOGLE)"
         [buttonProps]="googleButtonProps"
-        [full]="true"></app-button>
+         ></app-button>
     </app-card>
   `,
   imports: [
@@ -76,13 +70,13 @@ export class SignInComposite {
   constructor() {
     this.cardConfig = {
       header: 'Sign In',
-      style: {width: '350px'}
+      style: {maxWidth: '350px', width: '100%', margin: '0 auto'},
     };
     this.googleButtonProps ={
       label: 'Login with Google',
       icon: 'pi pi-google',
-      style: {width: '100%'},
       severity: 'contrast',
+      style: {width: '100%'},
     };
     this.sendButtonProps = {
       type: 'submit',

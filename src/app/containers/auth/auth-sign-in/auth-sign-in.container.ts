@@ -4,13 +4,13 @@ import { AsyncPipe } from '@angular/common';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { AuthFormService } from './services/auth-form.service';
 import { LoginInput } from '../../../../generated/gql.types';
 import { AuthState } from '../../../state/reducers/auth.reducer';
 import { selectAuthData } from '../../../state/selectors/auth.selectors';
 import { AuthSignInService } from './services/auth-sign-in.service';
 import { SignInComposite } from '../../../components/composites/auth/sign-in.composite';
 import { SocialLoginEnum } from '../../../../environments/environment.model';
+import { formlyAuthSignInConfig } from '../../../configs/formly/auth.formly.config';
 
 @Component({
   selector: 'app-auth-sign-in',
@@ -36,13 +36,12 @@ export class AuthSignInContainer implements OnInit, OnDestroy {
   loginSub: Subscription = new Subscription()
 
   constructor(
-    private authFormService: AuthFormService,
     private authSignInService: AuthSignInService,
     private store: Store
   ) {
-    this.loginForm = this.authFormService.createForm();
+    this.loginForm = new FormGroup({});
     this.loginStatus$ = this.store.select(selectAuthData);
-    this.fields = this.authFormService.getFormFields();
+    this.fields = formlyAuthSignInConfig()
   }
 
   ngOnInit() {

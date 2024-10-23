@@ -2,7 +2,7 @@ import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { applicationConfig, Preview } from '@storybook/angular';
 import { PrimeNGConfig } from 'primeng/api';
-import { presetsConfig, PRIMENG_THEME_PRESET } from '../src/app/configs/primeng-theme-preset';
+import { presetsConfig, PRIMENG_THEME_PRESET } from '../src/app/configs/primeng/primeng-theme-preset';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../src/app/app.routes';
 

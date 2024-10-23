@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { PRIMENG_INPUT_THEME_PRESET } from '../../../configs/primeng-theme-preset';
+import { PRIMENG_INPUT_THEME_PRESET } from '../../../configs/primeng/primeng-theme-preset';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 

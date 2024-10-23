@@ -16,5 +16,4 @@ export class ButtonComponent {
   @Input() buttonProps: ButtonProps = {};
   @Input() severity: 'success' | 'info' | 'warn' | 'danger' | 'help' | 'primary' | 'secondary' | 'contrast' | null | undefined;
   @Input() customClass: string | undefined ;
-  @Input() full: boolean = false;
 }

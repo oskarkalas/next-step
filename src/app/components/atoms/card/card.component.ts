@@ -2,7 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
 import { PrimeNGConfig } from 'primeng/api';
 import { CardModule } from 'primeng/card';
-import { PRIMENG_CART_THEME_PRESET } from '../../../configs/primeng-theme-preset';
+import { PRIMENG_CART_THEME_PRESET } from '../../../configs/primeng/primeng-theme-preset';
 
 export interface ICard {
   header?: string;
