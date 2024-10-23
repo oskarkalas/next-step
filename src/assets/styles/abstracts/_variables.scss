@@ -1,19 +1,5 @@
-@layer base {
-  :root {
-    --surface-ground: #293241;
-    --surface-body: var(--surface-900);
-    --surface-card: #343d4a;
-    --surface-white: #ffffff;
-    --surface-black: #000;
-    --card-border-radius: 24px;
-    --p-avatar-background: #000000;
-    --input-text-background: #293241;
-    --input-text-border: #545b67;
-    --input-text-color: #eaebec;
-    --input-text-border-radius: var(--card-border-radius);
-  }
-}
-
+// colors vars
+// ===========
 $clr_surface-body: var(--surface-ground);
 $clr_surface-ground: var(--surface-ground);
 $clr_surface-card: var(--surface-ground);

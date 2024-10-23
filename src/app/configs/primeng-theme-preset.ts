@@ -16,7 +16,21 @@ export const PRIMENG_INPUT_THEME_PRESET = {
           color: 'var(--input-text-color)',
           background: 'var(--input-text-background)',
           borderColor: 'var(--input-text-border)',
-          borderRadius: '12px'
+          borderRadius: '12px',
+          paddingX: '14px',
+          paddingY: '14px',
+        }
+      }
+    }
+  }
+}
+
+export const PRIMENG_BUTTON_THEME_PRESET = {
+  button: {
+    colorScheme: {
+      dark: {
+        root: {
+          borderRadius: '12px',
         }
       }
     }
@@ -72,6 +86,7 @@ export const PRIMENG_THEME_PRESET = definePreset(presetsConfig.presetsType, {
       }
     },
     ...PRIMENG_INPUT_THEME_PRESET,
+    ...PRIMENG_BUTTON_THEME_PRESET,
     divider: {
       colorScheme: {
         dark: {
