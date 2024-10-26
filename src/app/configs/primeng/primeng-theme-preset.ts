@@ -1,12 +1,7 @@
 import { definePreset } from 'primeng/themes';
 import { Aura } from 'primeng/themes/aura';
 
-export const presetsConfig = {
-  presetsType: Aura,
-  options: {
-    mode: 'dark'
-  }
-}
+
 
 export const PRIMENG_INPUT_THEME_PRESET = {
   inputtext: {
@@ -68,7 +63,7 @@ export const PRIMENG_CART_THEME_PRESET = {
   }
 }
 
-export const PRIMENG_THEME_PRESET = definePreset(presetsConfig.presetsType, {
+export const PRIMENG_THEME_PRESET = definePreset(Aura, {
   global: {
     body: {
       background: 'red'

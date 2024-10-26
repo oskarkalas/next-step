@@ -11,7 +11,7 @@ import { PrimeNGConfig, ToastMessageOptions } from 'primeng/api';
 import { MessageView } from './components/molecules/messages/messages.enum';
 import { MESSAGING_ACTIONS } from './state/actions/messages.actions';
 import { MessageToastComponent } from './components/molecules/messages/message-toast.component';
-import { presetsConfig, PRIMENG_THEME_PRESET } from './configs/primeng/primeng-theme-preset';
+import { PRIMENG_THEME_PRESET } from './configs/primeng/primeng-theme-preset';
 
 @Component({
   selector: 'app-root',
@@ -42,8 +42,7 @@ export class AppComponent {
 
   constructor(private store: Store) {
     this.primeNGConfig.theme.set({
-      preset: PRIMENG_THEME_PRESET,
-      ...presetsConfig.options,
+      ...PRIMENG_THEME_PRESET
     });
     this.primeNGConfig.ripple.set(true);
 
