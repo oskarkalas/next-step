@@ -11,7 +11,12 @@ import { PrimeNGConfig, ToastMessageOptions } from 'primeng/api';
 import { MessageView } from './components/molecules/messages/messages.enum';
 import { MESSAGING_ACTIONS } from './state/actions/messages.actions';
 import { MessageToastComponent } from './components/molecules/messages/message-toast.component';
-import { PRIMENG_THEME_PRESET } from './configs/primeng/primeng-theme-preset';
+import {
+  FORMS_PRIMENG_PRESET,
+  PRIMENG_CART_THEME_PRESET,
+  PRIMENG_THEME_PRESET
+} from './configs/primeng/primeng-theme-preset';
+import { Aura } from 'primeng/themes/aura';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +47,13 @@ export class AppComponent {
 
   constructor(private store: Store) {
     this.primeNGConfig.theme.set({
-      ...PRIMENG_THEME_PRESET
+      preset: Aura,
+      options: {
+        darkModeSelector: '.dark-theme',
+      },
+    });
+    this.primeNGConfig.theme.set({
+      preset: FORMS_PRIMENG_PRESET,
     });
     this.primeNGConfig.ripple.set(true);
 

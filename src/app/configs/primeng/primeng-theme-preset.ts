@@ -32,6 +32,55 @@ export const PRIMENG_BUTTON_THEME_PRESET = {
   }
 }
 
+export const PRIMENG_AVATAR_THEME_PRESET = {
+  avatar: {
+    colorScheme: {
+      dark: {
+        root: {
+          color: 'var(--surface-black)',
+          background: 'var(--surface-black)',
+        }
+      }
+    }
+  },
+}
+
+export const DIVIDER_PRIMENG_THEME_PRESET = {
+  divider: {
+    colorScheme: {
+      dark: {
+        root: {
+          borderColor: 'var(--input-text-border)',
+        }
+      }
+    }
+  },
+}
+
+export const FORMS_PRIMENG_PRESET = definePreset(Aura, {
+  semantic: {
+    colorScheme: {
+      light: {
+        formField: {
+          hoverBorderColor: '{primary.color}'
+        }
+      },
+      dark: {
+        formField: {
+          root: {
+            color: 'var(--input-text-color)',
+            background: 'var(--input-text-background)',
+            borderColor: 'var(--input-text-border)',
+            borderRadius: '12px',
+            paddingX: '14px',
+            paddingY: '14px',
+          }
+        }
+      }
+    }
+  }
+});
+
 export const PRIMENG_CART_THEME_PRESET = {
   components: {
     card: {
@@ -64,32 +113,10 @@ export const PRIMENG_CART_THEME_PRESET = {
 }
 
 export const PRIMENG_THEME_PRESET = definePreset(Aura, {
-  global: {
-    body: {
-      background: 'red'
-    }
-  },
   components: {
-    avatar: {
-      colorScheme: {
-        dark: {
-          root: {
-            color: 'var(--surface-black)',
-            background: 'var(--surface-black)',
-          }
-        }
-      }
-    },
+    ...DIVIDER_PRIMENG_THEME_PRESET,
+    ...PRIMENG_AVATAR_THEME_PRESET,
     ...PRIMENG_INPUT_THEME_PRESET,
     ...PRIMENG_BUTTON_THEME_PRESET,
-    divider: {
-      colorScheme: {
-        dark: {
-          root: {
-            borderColor: 'var(--input-text-border)',
-          }
-        }
-      }
-    }
   }
 });
