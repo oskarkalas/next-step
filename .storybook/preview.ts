@@ -5,16 +5,14 @@ import { PrimeNGConfig } from 'primeng/api';
 import { PRIMENG_THEME_PRESET } from '../src/app/configs/primeng/primeng-theme-preset';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../src/app/app.routes';
-import { Aura } from 'primeng/themes/aura';
 
 function provideTheme(config: PrimeNGConfig) {
   return () => {
     config.theme.set({
-      preset: Aura,
+      preset: PRIMENG_THEME_PRESET,
       options: {
         darkModeSelector: '.dark-theme',
       },
-      ...PRIMENG_THEME_PRESET
     });
   };
 }

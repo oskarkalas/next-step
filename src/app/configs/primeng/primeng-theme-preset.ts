@@ -57,7 +57,7 @@ export const DIVIDER_PRIMENG_THEME_PRESET = {
   },
 }
 
-export const FORMS_PRIMENG_PRESET = definePreset(Aura, {
+export const FORMS_PRIMENG_PRESET = {
   semantic: {
     colorScheme: {
       light: {
@@ -79,7 +79,7 @@ export const FORMS_PRIMENG_PRESET = definePreset(Aura, {
       }
     }
   }
-});
+};
 
 export const PRIMENG_CART_THEME_PRESET = {
   components: {
@@ -114,6 +114,7 @@ export const PRIMENG_CART_THEME_PRESET = {
 
 export const PRIMENG_THEME_PRESET = definePreset(Aura, {
   components: {
+    ...FORMS_PRIMENG_PRESET,
     ...DIVIDER_PRIMENG_THEME_PRESET,
     ...PRIMENG_AVATAR_THEME_PRESET,
     ...PRIMENG_INPUT_THEME_PRESET,
