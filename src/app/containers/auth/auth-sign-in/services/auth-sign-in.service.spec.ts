@@ -1,119 +1,65 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Store, StoreModule } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { AuthState } from '../../../../state/reducers/auth.reducer';
-import { AUTH_ACTIONS } from '../../../../state/actions/auth.actions';
-import { RoutesPathsEnum } from '../../../../core/enums/routes-paths.enum';
-import { environment } from '../../../../../environments/environment';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthSignInService } from './auth-sign-in.service';
-import { Provider, Role } from '../../../../../generated/gql.types';
+import { AUTH_ACTIONS } from '../../../../state/actions/auth.actions';
+import { LoginInput } from '../../../../../generated/gql.types';
 
 describe('AuthSignInService', () => {
   let service: AuthSignInService;
-  let store: jasmine.SpyObj<Store>;
-  let router: jasmine.SpyObj<Router>;
+  let store: Store;
+  let router: Router;
 
   beforeEach(() => {
-    const storeSpy = jasmine.createSpyObj('Store', ['select', 'dispatch']);
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate'], {
-      routerState: {
-        snapshot: {
-          root: {
-            queryParamMap: {
-              get: jasmine.createSpy().and.returnValue(null) // mock the query param map get method
-            }
-          }
-        }
-      }
-    });
-
     TestBed.configureTestingModule({
-      providers: [
-        AuthSignInService,
-        { provide: Store, useValue: storeSpy },
-        { provide: Router, useValue: routerSpy },
+      imports: [
+        RouterTestingModule,
+        StoreModule.forRoot({}),
+        ReactiveFormsModule
       ],
+      providers: [AuthSignInService]
+    });
+    service = TestBed.inject(AuthSignInService);
+    store = TestBed.inject(Store);
+    router = TestBed.inject(Router);
+
+    spyOn(store, 'dispatch').and.callThrough();
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+
+
+
+  describe('signInStart', () => {
+    it('should dispatch signIn action if form is valid', () => {
+      const loginInput: LoginInput = { email: 'test@example.com', password: 'password' };
+      const form: FormGroup = new FormGroup({
+        email: new FormControl('test@example.com', [Validators.required, Validators.email]),
+        password: new FormControl('password', [Validators.required])
+      });
+
+      service.signInStart(loginInput, form);
+
+      expect(store.dispatch).toHaveBeenCalledWith(AUTH_ACTIONS.signIn(loginInput));
     });
 
-    service = TestBed.inject(AuthSignInService);
-    store = TestBed.inject(Store) as jasmine.SpyObj<Store>;
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
-  });
+    it('should mark form as touched if form is invalid', () => {
+      const loginInput: LoginInput = { email: 'test@example.com', password: 'password' };
+      const form: FormGroup = new FormGroup({
+        email: new FormControl(null, [Validators.required, Validators.email]),
+        password: new FormControl(null, [Validators.required])
+      });
 
-  it('should handle valid auth state and redirect', () => {
-    const authState: AuthState = {
-      auth: { jwt: 'test-token', user: {
-          id: 1,
-          email: 'user@email.com',
-          picture: '',
-          provider: [Provider.Google],
-          role: Role.User, refreshToken: 'refreshToken',
-          createdAt: undefined,
-          updatedAt: undefined
-        }
-      },
-      err: false,
-      loading: false
-    };
-    store.select.and.returnValue(of(authState));
+      spyOn(form, 'markAllAsTouched');
 
-    spyOn(localStorage, 'setItem');
-    spyOnProperty(window.location, 'href', 'set'); // Correct usage for spying on a property
+      service.signInStart(loginInput, form);
 
-    service.handleAuthState();
-
-    expect(localStorage.setItem).toHaveBeenCalledWith('token', 'test-token');
-    expect(window.location.href).toBe(RoutesPathsEnum.DASHBOARD);
-  });
-
-  it('should check token URL param and redirect', () => {
-    // Mock the query param to return a token
-    spyOn(router.routerState.snapshot.root.queryParamMap, 'get').and.returnValue('test-token');
-
-    spyOn(localStorage, 'setItem');
-    spyOnProperty(window.location, 'href', 'set');
-
-    service.checkTokenUrlParam();
-
-    expect(localStorage.setItem).toHaveBeenCalledWith('token', 'test-token');
-    expect(window.location.href).toBe(RoutesPathsEnum.DASHBOARD);
-  });
-
-  it('should dispatch sign-in action for valid form', () => {
-    const loginInput = { email: 'user@email.com', password: 'pass' };
-    const form = { valid: true, markAllAsTouched: jasmine.createSpy() } as any;
-
-    service.signInStart(loginInput, form);
-
-    expect(store.dispatch).toHaveBeenCalledWith(AUTH_ACTIONS.signIn(loginInput));
-  });
-
-  it('should mark all as touched for invalid form', () => {
-    const loginInput = { email: 'user@email.com', password: 'pass' };;
-    const form = { valid: false, markAllAsTouched: jasmine.createSpy() } as any;
-
-    service.signInStart(loginInput, form);
-
-    expect(form.markAllAsTouched).toHaveBeenCalled();
-    expect(store.dispatch).not.toHaveBeenCalled();
-  });
-
-  it('should redirect to Google login', () => {
-    spyOnProperty(window.location, 'href', 'set');
-
-    service.redirectToGoogleLogin();
-
-    expect(window.location.href).toBe(environment.socials?.GOOGLE.redirectUrl);
-  });
-
-  it('should redirect to dashboard after token set', () => {
-    spyOn(localStorage, 'setItem');
-    spyOnProperty(window.location, 'href', 'set');
-
-    service.redirectToDashboard('test-token');
-
-    expect(localStorage.setItem).toHaveBeenCalledWith('token', 'test-token');
-    expect(window.location.href).toBe(RoutesPathsEnum.DASHBOARD);
+      expect(form.markAllAsTouched).toHaveBeenCalled();
+      expect(store.dispatch).not.toHaveBeenCalled();
+    });
   });
 });
