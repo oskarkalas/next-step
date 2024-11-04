@@ -8,7 +8,8 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "gql-codegen": "graphql-codegen --config graphql-codegen.yml",
-    "start-storybook": "nx run next-step:storybook"
+    "start-storybook": "nx run next-step:storybook",
+    "figma:export-components": "figma-export use-config .figmaexportrc.mjs"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +51,11 @@
     "@babel/helper-environment-visitor": "^7.24.7",
     "@babel/helper-function-name": "^7.24.7",
     "@babel/helper-hoist-variables": "^7.24.7",
+    "@figma-export/cli": "^6.0.2",
+    "@figma-export/output-components-as-es6": "^6.0.1",
+    "@figma-export/output-components-as-svg": "^6.0.1",
+    "@figma-export/output-components-as-svgstore": "^6.0.1",
+    "@figma-export/transform-svg-with-svgo": "^6.0.2",
     "@graphql-codegen/cli": "^5.0.2",
     "@graphql-codegen/typescript-apollo-angular": "^4.0.0",
     "@ngx-formly/schematics": "^6.3.5",
