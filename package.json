@@ -9,7 +9,8 @@
     "test": "nx test",
     "gql-codegen": "graphql-codegen --config graphql-codegen.yml",
     "start-storybook": "nx run next-step:storybook",
-    "figma:export-components": "figma-export use-config .figmaexportrc.mjs"
+    "figma:export-components": "figma-export use-config .figmaexportrc.mjs",
+    "generate:sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +34,7 @@
     "apollo-angular": "^7.0.2",
     "graphql": "^16.9.0",
     "install": "^0.13.0",
+    "ng-svg-icon-sprite": "^1.14.0",
     "npm": "^10.8.3",
     "primeicons": "^7.0.0",
     "primeng": "18.0.0-beta.3",
@@ -90,6 +92,7 @@
     "prettier": "^2.6.2",
     "storybook": "^8.3.6",
     "storybook-addon-deep-controls": "^0.8.2",
+    "svg2sprite-cli": "^2.0.1",
     "ts-node": "10.9.1",
     "typescript": "~5.4.5"
   },
