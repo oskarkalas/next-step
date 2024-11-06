@@ -10,9 +10,9 @@
     "gql-codegen": "graphql-codegen --config graphql-codegen.yml",
     "start-storybook": "nx run next-step:storybook",
     "figma:export-components": "figma-export use-config .figmaexportrc.mjs",
-    "generate:sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill"
+    "generate:sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill",
     "generate-asset-structure-json": "node files.mjs",
-    "generate:svg-sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill --stripAttrs stroke --stripAttrs id",
+    "generate:svg-sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill --stripAttrs stroke --stripAttrs id"
   },
   "private": true,
   "dependencies": {
