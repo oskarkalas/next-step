@@ -8,6 +8,8 @@
     "watch": "nx build --watch --configuration development",
     "test": "nx test",
     "gql-codegen": "graphql-codegen --config graphql-codegen.yml",
+    "generate-asset-structure-json": "node files.mjs",
+    "generate:svg-sprite": "svg2sprite ./src/assets/icons ./src/assets/sprite/sprite.svg --stripAttrs fill --stripAttrs stroke --stripAttrs id",
     "start-storybook": "nx run next-step:storybook"
   },
   "private": true,
@@ -74,6 +76,7 @@
     "@swc/core": "~1.5.7",
     "@swc/helpers": "~0.5.11",
     "@types/jasmine": "~4.3.0",
+    "filenames-to-json": "^1.0.1",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",

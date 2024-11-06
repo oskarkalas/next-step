@@ -47,7 +47,7 @@ export class AppComponent {
     this.primeNGConfig.theme.set({
       preset: Aura,
       options: {
-        darkModeSelector: '.dark-theme22',
+        darkModeSelector: '.dark-theme',
       },
     });
     this.primeNGConfig.theme.set({

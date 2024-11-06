@@ -112,7 +112,7 @@ export const PRIMENG_CART_THEME_PRESET = {
   }
 }
 
-export const PRIMENG_THEME_PRESET = definePreset(Aura, {
+export const    PRIMENG_THEME_PRESET = definePreset(Aura, {
   components: {
     ...FORMS_PRIMENG_PRESET,
     ...DIVIDER_PRIMENG_THEME_PRESET,
