@@ -1,12 +1,1 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="play">
-<g clip-path="url(#clip0_156_4559)">
-<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M3.5795 0.0515851C3.83263 -0.0532662 4.124 0.00469076 4.31774 0.198431L10.6403 6.52099C10.9049 6.78554 10.9049 7.21446 10.6403 7.47901L4.31774 13.8016C4.124 13.9953 3.83263 14.0533 3.5795 13.9484C3.32636 13.8436 3.16132 13.5966 3.16132 13.3226V0.677437C3.16132 0.403447 3.32636 0.156437 3.5795 0.0515851ZM4.51615 2.31287V11.6871L9.20328 7L4.51615 2.31287Z" fill="black"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_156_4559">
-<rect width="14" height="14" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"><g clip-path="url(#a)"><path fill="#000" fill-rule="evenodd" d="M3.58.052a.68.68 0 0 1 .738.146l6.322 6.323a.677.677 0 0 1 0 .958l-6.322 6.323a.677.677 0 0 1-1.157-.48V.678c0-.274.165-.52.418-.625m.936 2.26v9.375L9.203 7z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></svg>

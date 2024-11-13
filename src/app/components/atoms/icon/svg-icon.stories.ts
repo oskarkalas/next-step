@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular';
 import { SvgIconComponent } from './svg-icon.component';
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import appIcons from './../../../../assets/files-icons.json';
 
 export interface IconsArgs {
@@ -8,7 +7,7 @@ export interface IconsArgs {
 }
 
 const iconNames = [
-  ...appIcons.files.map( (value: string) => value.replace('.svg', '')),
+  ...appIcons.files.map((value: string) => value.replace('.svg', '')),
 ];
 
 const meta: Meta<SvgIconComponent> = {
@@ -41,7 +40,7 @@ export const Primary: Story = {
 const IconsTemplate = (args: IconsArgs) => ({
   props: args,
   template: `
-    <div style="display: flex; gap: 10px; flex-wrap: wrap">
+    <div style=" display: flex; gap: 10px; flex-wrap: wrap">
       <ng-container *ngFor="let icon of icons">
       <div style="border: 1px solid gray;
       display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 10px">

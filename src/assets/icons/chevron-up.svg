@@ -1,5 +1,1 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="chevron-up">
-<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M6.46967 3.96967C6.76256 3.67678 7.23744 3.67678 7.53033 3.96967L12.5303 8.96967C12.8232 9.26256 12.8232 9.73744 12.5303 10.0303C12.2374 10.3232 11.7626 10.3232 11.4697 10.0303L7 5.56066L2.53033 10.0303C2.23744 10.3232 1.76256 10.3232 1.46967 10.0303C1.17678 9.73744 1.17678 9.26256 1.46967 8.96967L6.46967 3.96967Z" fill="black"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"><path fill="#000" fill-rule="evenodd" d="M6.47 3.97a.75.75 0 0 1 1.06 0l5 5a.75.75 0 1 1-1.06 1.06L7 5.56l-4.47 4.47a.75.75 0 1 1-1.06-1.06z" clip-rule="evenodd"/></svg>

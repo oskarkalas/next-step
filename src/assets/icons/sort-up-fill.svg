@@ -1,5 +1,1 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="sort-up-fill">
-<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M7.41058 3.87978C7.18382 3.65303 6.81618 3.65303 6.58942 3.87978L1.17008 9.29912C1.00402 9.46519 0.954343 9.71493 1.04422 9.9319C1.13409 10.1489 1.34581 10.2903 1.58066 10.2903H12.4193C12.6542 10.2903 12.8659 10.1489 12.9558 9.9319C13.0457 9.71493 12.996 9.46519 12.8299 9.29912L7.41058 3.87978Z" fill="black"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"><path fill="#000" fill-rule="evenodd" d="M7.41 3.88a.58.58 0 0 0-.82 0L1.17 9.3a.58.58 0 0 0 .41.99h10.84a.58.58 0 0 0 .41-.99z" clip-rule="evenodd"/></svg>

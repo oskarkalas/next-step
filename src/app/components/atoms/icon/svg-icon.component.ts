@@ -1,22 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { IconSpriteModule } from 'ng-svg-icon-sprite';
+
+const DEFAULT_ICON_SIZE = 20;
 
 @Component({
   selector: 'spa-icon',
   template: `
     <svg-icon-sprite
-    [src]="'/assets/sprite/sprite.svg#' + iconName"
-    [width]="iconSize + 'px'"
-    [style.color]="color || 'inherit'"
-    [viewBox]="'0 0 18 18'"
-    [classes]="iconClass">
+      [src]="'/assets/sprites/icons.svg#' + iconName()"
+      [width]="iconSize() + 'px'"
+      [style.color]="color() || 'inherit'"
+      [viewBox]="'0 0 18 18'">
     </svg-icon-sprite>`,
   imports: [IconSpriteModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SvgIconComponent {
-  @Input() iconName: string;
-  @Input() iconClass: string;
-  @Input() color: string;
-  @Input() iconSize = 20;
+  iconName = input<string | undefined>(undefined);
+  iconClass = input<string | undefined>(undefined);
+  color = input<string | undefined>(undefined);
+  iconSize = input<number>(DEFAULT_ICON_SIZE);
 }

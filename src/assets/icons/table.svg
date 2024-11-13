@@ -1,12 +1,1 @@
-<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="table">
-<g clip-path="url(#clip0_156_4623)">
-<path id="Vector" fill-rule="evenodd" clip-rule="evenodd" d="M2.2 1.99999C1.64772 1.99999 1.2 2.4477 1.2 2.99999V6.39999H6.4V1.99999H2.2ZM7 0.799988H2.2C0.984974 0.799988 0 1.78496 0 2.99999V6.99999V11C0 12.215 0.984974 13.2 2.2 13.2H7H11.8C13.015 13.2 14 12.215 14 11V6.99999V2.99999C14 1.78496 13.015 0.799988 11.8 0.799988H7ZM7.6 1.99999V6.39999H12.8V2.99999C12.8 2.4477 12.3523 1.99999 11.8 1.99999H7.6ZM6.4 7.59999H1.2V11C1.2 11.5523 1.64772 12 2.2 12H6.4V7.59999ZM7.6 12V7.59999H12.8V11C12.8 11.5523 12.3523 12 11.8 12H7.6Z" fill="black"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_156_4623">
-<rect width="14" height="14" fill="white"/>
-</clipPath>
-</defs>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14"><g clip-path="url(#a)"><path fill="#000" fill-rule="evenodd" d="M2.2 2a1 1 0 0 0-1 1v3.4h5.2V2zM7 .8H2.2A2.2 2.2 0 0 0 0 3v8a2.2 2.2 0 0 0 2.2 2.2h9.6A2.2 2.2 0 0 0 14 11V3A2.2 2.2 0 0 0 11.8.8zM7.6 2v4.4h5.2V3a1 1 0 0 0-1-1zM6.4 7.6H1.2V11a1 1 0 0 0 1 1h4.2zM7.6 12V7.6h5.2V11a1 1 0 0 1-1 1z" clip-rule="evenodd"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h14v14H0z"/></clipPath></defs></svg>

@@ -3,7 +3,12 @@
   "compilerOptions": {
     "emitDecoratorMetadata": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@ngrx/*": ["../node_modules/@ngrx/*"]
+    }
   },
   "exclude": ["../**/*.spec.ts"],
   "include": [

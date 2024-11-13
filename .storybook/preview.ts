@@ -5,6 +5,10 @@ import { PrimeNGConfig } from 'primeng/api';
 import { PRIMENG_THEME_PRESET } from '../src/app/configs/primeng/primeng-theme-preset';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from '../src/app/app.routes';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { ApolloModule } from 'apollo-angular';
+import { provideHttpClient } from '@angular/common/http';
 
 function provideTheme(config: PrimeNGConfig) {
   return () => {
@@ -22,8 +26,12 @@ const preview: Preview = {
   decorators: [
     applicationConfig({
       providers: [
+        provideHttpClient(),
         importProvidersFrom(
-          RouterModule.forRoot(appRoutes),
+          RouterModule.forRoot(appRoutes, { useHash: true }),
+          StoreModule.forRoot({}),
+          EffectsModule.forRoot([]),
+          ApolloModule
         ),
         provideAnimations(),
         {
