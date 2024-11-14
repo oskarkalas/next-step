@@ -1,8 +1,6 @@
 import { definePreset } from 'primeng/themes';
 import { Aura } from 'primeng/themes/aura';
 
-
-
 export const PRIMENG_INPUT_THEME_PRESET = {
   inputtext: {
     colorScheme: {
@@ -39,6 +37,32 @@ export const PRIMENG_AVATAR_THEME_PRESET = {
         root: {
           color: 'var(--surface-black)',
           background: 'var(--surface-black)',
+        }
+      }
+    }
+  },
+}
+
+export const PRIMENG_DIALOG_THEME_PRESET = {
+  dialog: {
+    colorScheme: {
+      dark: {
+        root: {
+          background: 'var(--surface-black)',
+          borderColor: 'var(--surface-black)',
+        }
+      }
+    }
+  },
+}
+
+export const PRIMENG_TIRED_MENU_THEME_PRESET = {
+  tieredmenu: {
+    colorScheme: {
+      dark: {
+        root: {
+          background: 'var(--surface-black)',
+          borderColor: 'var(--surface-black)',
         }
       }
     }
@@ -112,12 +136,15 @@ export const PRIMENG_CART_THEME_PRESET = {
   }
 }
 
-export const    PRIMENG_THEME_PRESET = definePreset(Aura, {
+export const PRIMENG_THEME_PRESET = definePreset(Aura, {
   components: {
     ...FORMS_PRIMENG_PRESET,
     ...DIVIDER_PRIMENG_THEME_PRESET,
     ...PRIMENG_AVATAR_THEME_PRESET,
     ...PRIMENG_INPUT_THEME_PRESET,
     ...PRIMENG_BUTTON_THEME_PRESET,
+    ...PRIMENG_DIALOG_THEME_PRESET,
+    ...PRIMENG_CART_THEME_PRESET,
+    ...PRIMENG_TIRED_MENU_THEME_PRESET
   }
 });
