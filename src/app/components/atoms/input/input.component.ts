@@ -1,6 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
-import { PrimeNGConfig } from 'primeng/api';
-import { PRIMENG_INPUT_THEME_PRESET } from '../../../configs/primeng/primeng-theme-preset';
+import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 
@@ -33,11 +31,4 @@ export class InputComponent {
   @Input() value?: string;
   @Input() variant: 'filled' | 'outlined' = 'outlined';
   @Input() disabled: boolean = false;
-  public primeNGConfig: PrimeNGConfig = inject(PrimeNGConfig);
-
-  constructor(){
-    this.primeNGConfig.theme.set({
-      preset: PRIMENG_INPUT_THEME_PRESET,
-    });
-  }
 }

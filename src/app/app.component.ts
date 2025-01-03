@@ -1,31 +1,27 @@
 import { Component, inject } from '@angular/core';
 import { fromEvent, merge, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AsyncPipe, JsonPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MessagesModule } from 'primeng/messages';
 import { ToastCloseEvent } from 'primeng/toast';
 import { Store } from '@ngrx/store';
 import { selectFilteredMessagesByType } from './state/reducers/message.reducer';
-import { PrimeNGConfig, ToastMessageOptions } from 'primeng/api';
+import { ToastMessageOptions } from 'primeng/api';
 import { MessageView } from './components/molecules/messages/messages.enum';
 import { MESSAGING_ACTIONS } from './state/actions/messages.actions';
 import { MessageToastComponent } from './components/molecules/messages/message-toast.component';
-import {
-  PRIMENG_THEME_PRESET
-} from './configs/primeng/primeng-theme-preset';
-import { Aura } from 'primeng/themes/aura';
+import { PRIMENG_THEME_PRESET } from './configs/primeng/primeng-theme-preset';
+import { PrimeNG } from 'primeng/config';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     AsyncPipe,
-    NgIf,
     RouterOutlet,
     MessagesModule,
-    JsonPipe,
-    MessageToastComponent,
+    MessageToastComponent
   ],
   template: `
       <app-messages-toast [messages]="(messages | async)!"
@@ -41,15 +37,9 @@ import { Aura } from 'primeng/themes/aura';
 export class AppComponent {
   public onlineOffline: Observable<boolean>;
   protected messages: Observable<Array<ToastMessageOptions>>;
-  public primeNGConfig: PrimeNGConfig = inject(PrimeNGConfig);
+  public primeNGConfig: PrimeNG = inject(PrimeNG);
 
   constructor(private store: Store) {
-    this.primeNGConfig.theme.set({
-      preset: Aura,
-      options: {
-        darkModeSelector: '.dark-theme',
-      },
-    });
     this.primeNGConfig.theme.set({
       preset: PRIMENG_THEME_PRESET,
       options: {

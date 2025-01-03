@@ -1,9 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
+import { Simulate } from 'react-dom/test-utils';
+import play = Simulate.play;
+import { within } from '@storybook/testing-library';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
-  title: 'Atoms/Button',
+  title: 'UI/Atoms/Buttons/Button',
 };
 
 export default meta;
@@ -15,7 +18,7 @@ export const Primary: Story = {
     buttonProps: {
       label: 'button label',
     }
-  }
+  },
 };
 
 export const Warning: Story = {
@@ -43,5 +46,19 @@ export const Rounded: Story = {
       rounded: true,
       label: 'button label',
     }
+  }
+};
+
+export const Rounded2: Story = {
+  args: {
+    severity: 'primary',
+    buttonProps: {
+      rounded: true,
+      label: 'button label',
+    }
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await canvas.findByText('button label');
   }
 };

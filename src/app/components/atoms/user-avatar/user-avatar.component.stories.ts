@@ -70,7 +70,7 @@ export const AvatarWithoutImage: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByText(/JH/gi)).toBeTruthy();
+    await expect(canvas.getByText(/JH/gi)).toBeTruthy();
   },
 };
 

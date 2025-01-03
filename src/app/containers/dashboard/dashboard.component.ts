@@ -1,10 +1,8 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {SETTINGS_ACTIONS} from "../../state/actions/settings.actions";
 import {Observable, take} from "rxjs";
 import {User} from "../../../generated/gql.types";
 import {selectSettingsMe} from "../../state/selectors/settings.selectors";
-import {AsyncPipe, NgIf} from "@angular/common";
 import {LayoutComponent} from "../../components/layouts/layout.component";
 import {MenuComponent, MenuConfigModel} from "../../components/molecules/menu/menu.component";
 import {map} from "rxjs/operators";
@@ -19,8 +17,6 @@ import {RouterOutlet} from "@angular/router";
   selector: 'app-dashboard',
   standalone: true,
   imports: [
-    NgIf,
-    AsyncPipe,
     LayoutComponent,
     MenuComponent,
     DrawerSecondaryComponent,
@@ -34,9 +30,7 @@ export class DashboardComponent implements OnInit {
   private config: SecondaryDrawerConfigModel = {items: []};
   private menuConfig: MenuConfigModel = {items: []};
 
-  constructor(private store: Store) {
-    store.dispatch(SETTINGS_ACTIONS.loadMe());
-  }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.me$ = this.store.select(selectSettingsMe);
@@ -61,14 +55,7 @@ export class DashboardComponent implements OnInit {
             url: '/'
           },
           items: [
-            {
-              label: "Home",
-              route: "home",
-            },
-            {
-              label: "About",
-              route: "about"
-            }
+
           ],
           user: me || undefined,
         }

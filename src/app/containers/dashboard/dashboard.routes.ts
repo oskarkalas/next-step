@@ -5,6 +5,7 @@ import {EffectsModule} from "@ngrx/effects";
 import {SettingsEffects} from "../../state/effects/settings.effects";
 import {settingsKey, settingsReducer} from "../../state/reducers/settings.reducer";
 import {DashboardComponent} from "./dashboard.component";
+import { dashboardResolver } from '../resolvers/dashboard.resolver';
 
 export const dashboardRoutes: Route[] = [
   {
@@ -16,5 +17,6 @@ export const dashboardRoutes: Route[] = [
       ),
     ],
     component: DashboardComponent,
+    resolve: [dashboardResolver]
   },
 ];

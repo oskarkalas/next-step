@@ -1,6 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
 import { NgIf } from '@angular/common';
-import { PrimeNGConfig } from 'primeng/api';
+import { PrimeNG } from 'primeng/config';
 import { CardModule } from 'primeng/card';
 import { PRIMENG_CART_THEME_PRESET } from '../../../configs/primeng/primeng-theme-preset';
 
@@ -45,7 +45,7 @@ export class CardComponent {
   @Input() content?: string;
   @Input() wrapClass?: string;
 
-  public primeNGConfig: PrimeNGConfig = inject(PrimeNGConfig);
+  public primeNGConfig: PrimeNG = inject(PrimeNG);
 
   constructor(){
     this.primeNGConfig.theme.set({

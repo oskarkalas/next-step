@@ -3,7 +3,7 @@ import { CardComponent } from './card.component';
 
 const meta: Meta<CardComponent> = {
   component: CardComponent,
-  title: 'Atoms/Card',
+  title: 'UI/Atoms/Card',
 };
 export default meta;
 type Story = StoryObj<CardComponent>;

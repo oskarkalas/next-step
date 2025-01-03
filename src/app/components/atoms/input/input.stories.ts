@@ -3,7 +3,7 @@ import { InputComponent } from './input.component';
 
 const meta: Meta<InputComponent> = {
   component: InputComponent,
-  title: 'Atoms/Input',
+  title: 'UI/Atoms/Input',
   argTypes: {
     variant: {
       options: ['filled', 'outlined'],

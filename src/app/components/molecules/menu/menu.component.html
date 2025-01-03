@@ -1,6 +1,6 @@
-<p-toolbar aria-label="Top menu" [style]="{ 'border-radius': '0', 'width': '100%' }">
+<p-toolbar aria-label="Top menu">
   @if (menuConfig?.logo) {
-    <ng-template pTemplate="start">
+    <ng-template #start>
       <a [href]="menuConfig?.logo?.url">
       @if(menuConfig?.logo?.imageUrl) {
         <img ngSrc="{{menuConfig?.logo?.imageUrl}}" [alt]="menuConfig?.logo?.name" fill>
@@ -10,16 +10,13 @@
       </a>
     </ng-template>
   }
-  <ng-template pTemplate="center">
+  <ng-template #center>
     @for (menuItem of menuConfig?.items; track menuItem.label) {
-      <p-button [label]="menuItem.label" text plain />
-    } @empty {
-      There are no items.
+      <p-button [label]="menuItem.label" text />
     }
   </ng-template>
-  <ng-template pTemplate="end">
-    <app-user-avatar [userData]="menuConfig?.user"
-                     (click)="drawersService.secondaryDrawerToggle()">
+  <ng-template #end>
+    <app-user-avatar [userData]="menuConfig?.user" (click)="drawersService.secondaryDrawerToggle()">
     </app-user-avatar>
   </ng-template>
 </p-toolbar>

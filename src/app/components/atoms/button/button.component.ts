@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ButtonModule, ButtonProps } from 'primeng/button';
 
 @Component({
@@ -10,7 +10,8 @@ import { ButtonModule, ButtonProps } from 'primeng/button';
     </div>`,
   imports: [
     ButtonModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
   buttonProps = input<ButtonProps>({});

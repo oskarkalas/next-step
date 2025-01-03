@@ -1,5 +1,5 @@
-import { definePreset } from 'primeng/themes';
-import { Aura } from 'primeng/themes/aura';
+import Aura from '@primeng/themes/aura';
+import { definePreset } from '@primeng/themes';
 
 export const PRIMENG_INPUT_THEME_PRESET = {
   inputtext: {
@@ -12,6 +12,20 @@ export const PRIMENG_INPUT_THEME_PRESET = {
           borderRadius: '12px',
           paddingX: '14px',
           paddingY: '14px',
+        }
+      }
+    }
+  }
+}
+
+export const PRIMENG_INPUT_THEME_TOOLBAR = {
+  toolbar: {
+    colorScheme: {
+      dark: {
+        root: {
+          color: 'var(--input-text-color)',
+          borderRadius: '0',
+          borderColor: 'none',
         }
       }
     }
@@ -35,7 +49,7 @@ export const PRIMENG_AVATAR_THEME_PRESET = {
     colorScheme: {
       dark: {
         root: {
-          color: 'var(--surface-black)',
+          color: 'var(--surface-white)',
           background: 'var(--surface-black)',
         }
       }
@@ -62,7 +76,7 @@ export const PRIMENG_TIRED_MENU_THEME_PRESET = {
       dark: {
         root: {
           background: 'var(--surface-black)',
-          borderColor: 'var(--surface-black)',
+          borderColor: 'none',
         }
       }
     }
@@ -145,6 +159,7 @@ export const PRIMENG_THEME_PRESET = definePreset(Aura, {
     ...PRIMENG_BUTTON_THEME_PRESET,
     ...PRIMENG_DIALOG_THEME_PRESET,
     ...PRIMENG_CART_THEME_PRESET,
-    ...PRIMENG_TIRED_MENU_THEME_PRESET
+    ...PRIMENG_TIRED_MENU_THEME_PRESET,
+    ...PRIMENG_INPUT_THEME_TOOLBAR
   }
 });

@@ -3,7 +3,7 @@ import { ButtonComponent } from './button.component';
 import { ButtonProps } from 'primeng/button';
 
 export default {
-  title: 'Atoms/Button',
+  title: 'UI/Atoms/Buttons/Buttons Preview',
   component: ButtonComponent,
   argTypes: {
     buttons: {

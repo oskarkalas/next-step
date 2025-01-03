@@ -22,7 +22,8 @@ export const appRoutes: Route[] = [
   },
   {
     path: ContainerPathsEnum.AUTH,
-    loadChildren: () => import('./containers/auth/auth.routes').then(route => route.authRoutes),
+    loadChildren: () =>
+      import('./containers/auth/auth.routes').then(route => route.authRoutes),
     canActivate: [LoginGuard]
   }
 ];

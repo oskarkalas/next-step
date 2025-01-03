@@ -1,19 +1,22 @@
-import {ApplicationConfig, importProvidersFrom, isDevMode} from '@angular/core';
-import {StoreModule} from "@ngrx/store";
-import {RouterModule} from '@angular/router';
-import {HttpHeaders, provideHttpClient} from "@angular/common/http";
-import {provideStoreDevtools} from "@ngrx/store-devtools";
-import {loadDevMessages, loadErrorMessages} from "@apollo/client/dev";
-import {APOLLO_OPTIONS, ApolloModule} from "apollo-angular";
-import {ApolloLink, InMemoryCache} from "@apollo/client/core";
-import {HttpLink} from "apollo-angular/http";
-import {EffectsModule} from "@ngrx/effects";
-import {environment} from "./environments/environment";
-import {routerReducer, StoreRouterConnectingModule} from "@ngrx/router-store";
-import {appRoutes} from "./app/app.routes";
-import {messagesReducer} from "./app/state/reducers/message.reducer";
-import {MODULE_KEYS} from "./app/core/enums/module-keys.enum";
-import {provideAnimations} from "@angular/platform-browser/animations";
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
+import { HttpHeaders, provideHttpClient } from '@angular/common/http';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { loadDevMessages, loadErrorMessages } from '@apollo/client/dev';
+import { Apollo, APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloLink, InMemoryCache } from '@apollo/client/core';
+import { HttpLink } from 'apollo-angular/http';
+import { EffectsModule } from '@ngrx/effects';
+import { environment } from './environments/environment';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { appRoutes } from './app/app.routes';
+import { messagesReducer } from './app/state/reducers/message.reducer';
+import { MODULE_KEYS } from './app/core/enums/module-keys.enum';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { providePrimeNG } from 'primeng/config';
+import { PRIMENG_THEME_PRESET } from './app/configs/primeng/primeng-theme-preset';
 
 if (isDevMode()) {
   loadDevMessages();
@@ -57,6 +60,7 @@ export const bootstrapConfig: ApplicationConfig = {
       useFactory: createApollo,
       deps: [HttpLink]
     },
+    Apollo,
     importProvidersFrom(
       RouterModule.forRoot(appRoutes),
       StoreModule.forRoot({
@@ -65,8 +69,9 @@ export const bootstrapConfig: ApplicationConfig = {
       }),
       EffectsModule.forRoot([]),
       StoreRouterConnectingModule.forRoot(),
-      ApolloModule
     ),
+    provideAnimationsAsync(),
+    providePrimeNG(PRIMENG_THEME_PRESET),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
